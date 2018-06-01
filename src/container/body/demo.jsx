@@ -2,7 +2,8 @@ import React from "react";
 import {Button} from 'antd';
 import CollectionCreateForm from "./modal";
 import Father from "./father";
-import {testApi} from "api";
+import {postApi, getApi} from "api";
+import {urls} from "urls";
 
 //引入redux
 import {bindActionCreators} from 'redux';
@@ -40,7 +41,11 @@ class Demo extends React.Component {
         return;
       }
 
-      testApi(options, (res) => {
+      // postApi(options, urls.postApi, (res) => {
+      // 	console.log(res);
+      // });
+
+      getApi(options, urls.getApi, (res) => {
       	console.log(res);
       });
       

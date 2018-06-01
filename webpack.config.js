@@ -13,7 +13,8 @@ module.exports = {
 	resolve: {
 		extensions: ['.js', '.jsx', '.less', '.css'],
 		alias: {
-			api: path.resolve(__dirname, 'src/fetch/api')  //使用绝对路径
+			api: path.resolve(__dirname, 'src/fetch/api'),  //使用绝对路径
+			urls: path.resolve(__dirname, 'src/fetch/url')
 		}
 	},
 
