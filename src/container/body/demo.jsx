@@ -10,81 +10,85 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import * as ActionAll from '../actions/actionAll';
 
-class Demo extends React.Component {
-  constructor(){
-    super();
+class Demo extends React.Component{
+    constructor(){
+        super();
 
-    this.test = <h1>hello world</h1>;
-    this.state={
-      visible: false,
-      dataObj: {
-        name:"王红金",
-        code:"321323199105113317",
-        sex:"男",
-        hobby:""
-      }
+        this.state = {
+            visible: false,
+            dataObj: {
+                name:"王红金",
+                code:"321323199105113317",
+                sex:"男",
+                hobby:""
+            }
+        };
     }
-  }
 
-  showModal(){
-    this.setState({ visible: true });
-  }
+    componentDidMount(){
+        this.props.actionAll.render({
+            loading:false
+        });
+    }
 
-  handleCancel() {
-    this.setState({ visible: false });
-  }
+    //对话框显示隐藏的控制代码
+    showModal(){
+        this.setState({visible: true});
+    }
 
-  handleCreate() {
-    const form = this.formRef.props.form;
-    form.validateFields((err, options) => {
-      if(err){
-        return;
-      }
+    //对话框-取消
+    handleCancel(){
+        this.setState({visible: false});
+    }
 
-      // postApi(options, urls.postApi, (res) => {
-      // 	console.log(res);
-      // });
+    //对话框-提交
+    handleCreate(){
+        const form = this.formRef.props.form;
+        form.validateFields((err, options) => {
+            if(!err){
+                //post接口
+                postApi(options, urls.postApi, (res) => {
+                    console.log(res);
+                });
+                
+                //get接口
+                getApi(options, urls.getApi, (res) => {
+                    console.log(res);
+                });
+                
+                //对话框初始化
+                form.resetFields();
 
-      getApi(options, urls.getApi, (res) => {
-      	console.log(res);
-      });
-      
-//    form.resetFields();
-//    this.setState({ 
-//      visible: false,
-//      dataObj: Object.assign(this.state.dataObj, values)
-//    });
-    });
-  }
+                this.setState({ 
+                    visible: false,
+                    dataObj: Object.assign(this.state.dataObj, options)
+                });
+            };
+        });
+    }
 
-  saveFormRef(_this){
-    this.formRef = _this;
-  }
-
-  componentDidMount(){
-    this.props.actionAll.render({
-      loading:false
-    });
-  }
+    //把对话框里面form对象挂在到this下面
+    saveFormRef(_this){
+        this.formRef = _this;
+    }
   
-  render() {
-    return (
-      <div>
-        {this.test}
-        <Button type="primary" onClick={this.showModal.bind(this)}>New Collection</Button>
+    render(){
+        return(
+            <React.Fragment>
+                <Button type="primary" onClick={this.showModal.bind(this)}>打开对话框</Button>
 
-        <CollectionCreateForm
-          wrappedComponentRef={this.saveFormRef.bind(this)}
-          dataObj={this.state.dataObj}
-          visible={this.state.visible}
-          onCancel={this.handleCancel.bind(this)}
-          onCreate={this.handleCreate.bind(this)}
-        />
+                <CollectionCreateForm
+                    wrappedComponentRef={this.saveFormRef.bind(this)}
+                    dataObj={this.state.dataObj}
+                    visible={this.state.visible}
+                    onCancel={this.handleCancel.bind(this)}
+                    onCreate={this.handleCreate.bind(this)}
+                />
 
-        <Father />
-      </div>
-    );
-  }
+                <Father />
+            </React.Fragment>
+        );
+    }
 }
 
 // -------------------redux react 绑定--------------------

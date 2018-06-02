@@ -3,7 +3,7 @@ import get from './get';
 import post from './post';
 import {Message} from 'antd';
 
-//测试POST接口
+//POST接口 (传递对象自动转化成json字符串)
 export function postApi(options, url, callback){
 	if(callback){
         const result = post((path + url), JSON.stringify(options));
@@ -21,8 +21,13 @@ export function postApi(options, url, callback){
     };
 }
 
-//测试get接口
+//get接口 (传递对象，如果对象值里面有数组类型的自动转化成字符串)
 export function getApi(options, url, callback){
+    for(let i in options){
+        if(options[i] instanceof Array){
+          options[i] = options[i].toString();
+        }
+    };
 	if(callback){
         const result = get((path + url), options);
         result.then(res => {

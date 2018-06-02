@@ -2,26 +2,13 @@ const Koa = require('koa');
 const app = new Koa();
 
 app.use(async(ctx) => {
-    if(ctx.url === '/api/get' && ctx.method === 'GET'){
-        let html = `
-            <h1>koa2 request post demo</h1>
-            <form method="POST" action="/">
-            <p>userName</p>
-            <input name="userName" /><br/>
-            <p>nickName</p>
-            <input name="nickName" /><br/>
-            <p>email</p>
-            <input name="email" /><br/>
-            <button type="submit">submit</button>
-            </form>
-        `;
-        ctx.body = html;
+    if(ctx.url.substring(0, ctx.url.indexOf("?")) === '/api/get' && ctx.method === 'GET'){
+        let request = ctx.request;
+        let req_query = request.query;
+        ctx.body = {flag: true, data: [req_query]}
     }else if(ctx.url === '/api/post' && ctx.method === 'POST'){
         let postData = await parsePostData(ctx);
         ctx.body = postData;
-    }else{
-        // 其他请求显示404
-        ctx.body = '<h1>404！！！ o(╯□╰)o</h1>';
     };
 })
 
@@ -58,5 +45,5 @@ parseQueryStr = (queryStr) => {
 }
 
 app.listen(3000, () => {
-    console.log('[demo] request post is starting at port 3000');
+    console.log('request post is starting at port 3000');
 })
