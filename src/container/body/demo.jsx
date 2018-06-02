@@ -17,10 +17,11 @@ class Demo extends React.Component{
         this.state = {
             visible: false,
             dataObj: {
-                name:"王红金",
-                code:"321323199105113317",
-                sex:"男",
-                hobby:""
+                name: "王红金",
+                code: "321323199105113317",
+                sex: "男",
+                hobby: "",
+                skill: []
             }
         };
     }
