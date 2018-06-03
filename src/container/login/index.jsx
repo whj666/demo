@@ -1,15 +1,19 @@
-import React from 'react'
-import './style.less'
-import { Button, Icon, Form,Input,Checkbox,Spin,message } from 'antd'
-
+import React from 'react';
+import './style.less';
+import {setCookie} from "public";
+import {Button, Icon, Form,Input,Checkbox,Spin,message} from 'antd';
+import {urls} from "urls";
+import {postApi} from "api";
 const FormItem = Form.Item;
 
-class Login extends React.Component {
-    constructor(props) {
+class Login extends React.Component{
+    constructor(props){
         super(props);
 
         this.state={
-            loading:true
+            loading: true,
+            checkeOne: (localStorage.checkeOne !== undefined ? Boolean(localStorage.checkeOne) : false),
+            checkeTwo: (localStorage.checkeTwo !== undefined ? Boolean(localStorage.checkeTwo) : false)
         }
     }
 
@@ -18,8 +22,34 @@ class Login extends React.Component {
             userName: localStorage.userName
         });
         this.setState({
-            loading:false
+            loading: false
         })
+    }
+
+    //记录checkbox值
+    checkChange(e){
+        if(e.target.name === "checkeOne"){
+            this.setState({
+                checkeOne: !this.state.checkeOne
+            },() => {
+                if(this.state.checkeOne){
+                    localStorage.checkeOne = "1";
+                }else{
+                    localStorage.checkeOne = "";
+                };
+            })
+        }else{
+            this.setState({
+                checkeTwo: !this.state.checkeTwo
+            },() => {
+                if(this.state.checkeTwo){
+                    localStorage.checkeTwo = "1";
+                }else{
+                    localStorage.checkeTwo = "";
+                };
+            })
+            
+        }
     }
 
     //登陆提交
@@ -27,8 +57,28 @@ class Login extends React.Component {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
-                
-            }
+                let options = {
+                    userName: values.userName,
+                    password: values.password
+                }
+
+                postApi(options, urls.login, (res) => {
+                    sessionStorage.login="true";
+                    if(this.state.checkeOne){
+                        localStorage.userName=values.userName;
+                    }else{
+                        localStorage.removeItem("userName");
+                    }
+
+                    if(this.state.checkeTwo){
+                        setCookie("token", res.sgkey, 7);
+                    }else{
+                        setCookie("token", res.sgkey, 365);
+                    }
+
+                    this.props.history.push("/demo");
+                })
+            };
         });
     }
 
@@ -40,10 +90,6 @@ class Login extends React.Component {
                     <div className="bg">
                         <div className="title">密码登陆</div>
                         <div className="form">
-
-                            <input type="text" value="admin" style={{position: "absolute",zIndex: "-1"}} disabled autoComplete = "off"/> 
-                            <input type="password"  value=" " style={{position: "absolute",zIndex: "-1"}} disabled autoComplete = "off"/> 
-
                             <FormItem>
                                 {getFieldDecorator('userName', {
                                     rules: [{ required: true, message: '请输入账号！' }],
@@ -72,9 +118,14 @@ class Login extends React.Component {
                                 )}
                             </FormItem>
 
+                            <div className="radio">
+                                <div><Checkbox name="checkeOne" checked={this.state.checkeOne} onChange={this.checkChange.bind(this)}>记住账号</Checkbox></div>
+                                <div><Checkbox name="checkeTwo" checked={this.state.checkeTwo} onChange={this.checkChange.bind(this)}>一周免登陆</Checkbox></div>
+                            </div>
+
                             <Button type="primary" htmlType="submit">登录</Button>
-                            <Button style={{marginTop: 24, marginBottom: 24}}>注册</Button>
-                            <p className="copyright"></p>
+
+                            <p className="copyright">Copyright <i className="anticon anticon-copyright"></i> 2018 JIN</p>
                         </div>
                     </div>
                 </Form>

@@ -4,6 +4,7 @@ import CollectionCreateForm from "./modal";
 import Father from "./father";
 import {postApi, getApi} from "api";
 import {urls} from "urls";
+import {getTimeValue} from "public";
 
 //引入redux
 import {bindActionCreators} from 'redux';
@@ -15,6 +16,7 @@ class Demo extends React.Component{
         super();
 
         this.state = {
+            timeNow: getTimeValue(null, "yyyy-mm-dd: hh:mm:ss"),
             visible: false,
             dataObj: {
                 name: "王红金",
@@ -30,6 +32,12 @@ class Demo extends React.Component{
         this.props.actionAll.render({
             loading:false
         });
+
+        this.time = setInterval(this.getTime.bind(this), 1000);
+    }
+
+    componentWillUnmount(){
+        clearInterval(this.time);
     }
 
     //对话框显示隐藏的控制代码
@@ -72,6 +80,18 @@ class Demo extends React.Component{
     saveFormRef(_this){
         this.formRef = _this;
     }
+
+    //返回
+    handleBack(){
+        this.props.history.goBack();
+    }
+
+    //时钟
+    getTime(){
+        this.setState({
+            timeNow: getTimeValue(null, "yyyy-mm-dd: hh:mm:ss")
+        })
+    }
   
     render(){
         return(
@@ -87,6 +107,10 @@ class Demo extends React.Component{
                 />
 
                 <Father />
+
+                <Button onClick={this.handleBack.bind(this)}>返回</Button>
+                <br/>
+                {this.state.timeNow}
             </React.Fragment>
         );
     }

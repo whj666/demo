@@ -11,9 +11,9 @@ export function postApi(options, url, callback){
             return res.json();
         }).then(json => {
             if(json.flag){
-                callback(json.data);
+                callback(json);
             }else{
-                Message.error(json.error);
+                Message.error(json.message);
             }
         }).catch(ex => {
             Message.error(ex);
@@ -34,7 +34,7 @@ export function getApi(options, url, callback){
             return res.json();
         }).then(json => {
             if(json.flag){
-                callback(json.data);
+                callback(json);
             }else{
                 Message.error(json.error);
             }

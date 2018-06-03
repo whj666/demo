@@ -1,4 +1,5 @@
 export const urls = {
     postApi: '/api/post',
-    getApi: '/api/get'
+    getApi: '/api/get',
+    login: '/api/login'
 };
