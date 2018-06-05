@@ -12,8 +12,7 @@ class Login extends React.Component{
 
         this.state={
             loading: true,
-            checkeOne: (localStorage.checkeOne !== undefined ? Boolean(localStorage.checkeOne) : false),
-            checkeTwo: (localStorage.checkeTwo !== undefined ? Boolean(localStorage.checkeTwo) : false)
+            checkeOne: (localStorage.checkeOne !== undefined ? Boolean(localStorage.checkeOne) : false)
         }
     }
 
@@ -28,28 +27,15 @@ class Login extends React.Component{
 
     //记录checkbox值
     checkChange(e){
-        if(e.target.name === "checkeOne"){
-            this.setState({
-                checkeOne: !this.state.checkeOne
-            },() => {
-                if(this.state.checkeOne){
-                    localStorage.checkeOne = "1";
-                }else{
-                    localStorage.checkeOne = "";
-                };
-            })
-        }else{
-            this.setState({
-                checkeTwo: !this.state.checkeTwo
-            },() => {
-                if(this.state.checkeTwo){
-                    localStorage.checkeTwo = "1";
-                }else{
-                    localStorage.checkeTwo = "";
-                };
-            })
-            
-        }
+        this.setState({
+            checkeOne: !this.state.checkeOne
+        },() => {
+            if(this.state.checkeOne){
+                localStorage.checkeOne = "1";
+            }else{
+                localStorage.checkeOne = "";
+            };
+        })
     }
 
     //登陆提交
@@ -68,12 +54,6 @@ class Login extends React.Component{
                         localStorage.userName=values.userName;
                     }else{
                         localStorage.removeItem("userName");
-                    }
-
-                    if(this.state.checkeTwo){
-                        setCookie("token", res.sgkey, 7);
-                    }else{
-                        setCookie("token", res.sgkey, 365);
                     }
 
                     this.props.history.push("/demo");
@@ -119,8 +99,7 @@ class Login extends React.Component{
                             </FormItem>
 
                             <div className="radio">
-                                <div><Checkbox name="checkeOne" checked={this.state.checkeOne} onChange={this.checkChange.bind(this)}>记住账号</Checkbox></div>
-                                <div><Checkbox name="checkeTwo" checked={this.state.checkeTwo} onChange={this.checkChange.bind(this)}>一周免登陆</Checkbox></div>
+                                <Checkbox name="checkeOne" checked={this.state.checkeOne} onChange={this.checkChange.bind(this)}>记住账号</Checkbox>
                             </div>
 
                             <Button type="primary" htmlType="submit">登录</Button>
