@@ -5,6 +5,12 @@ const connectDB = require('./connectDB.js');
 const getDocuments = require('./getDocuments.js');
 const dbName = 'admin';
 
+const mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/test');
+const Cat = mongoose.model('Cat', { name: String });
+const kitty = new Cat({ name: 'Zildjian' });
+kitty.save().then(() => console.log('meow'));
+
 //使用ctx.body解析中间件 (当POST请求的时候，中间件koa-bodyparser解析POST传递的数据，并显示出来)
 app.use(bodyParser())
 
