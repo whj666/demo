@@ -15,7 +15,6 @@ module.exports = function connectDB(options){
                 resolve(res);
                 client.close();
             })
-            
         })
     })
 }

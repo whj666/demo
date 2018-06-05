@@ -5,7 +5,6 @@ const connectDB = require('./connectDB.js');
 const getDocuments = require('./getDocuments.js');
 const dbName = 'admin';
 
-
 //使用ctx.body解析中间件 (当POST请求的时候，中间件koa-bodyparser解析POST传递的数据，并显示出来)
 app.use(bodyParser())
 
