@@ -15,7 +15,8 @@ module.exports = {
 		alias: {
 			api: path.resolve(__dirname, 'src/fetch/api'),  //使用绝对路径
 			urls: path.resolve(__dirname, 'src/fetch/url'),
-			public: path.resolve(__dirname, 'src/public/public.js')
+			public: path.resolve(__dirname, 'src/public/public.js'),
+			actionAll: path.resolve(__dirname, 'src/container/actions/actionAll')
 		}
 	},
 
@@ -50,7 +51,7 @@ module.exports = {
 	devServer: {
 		port: 8090,  //监听8090端口
 		open: true,  //服务器启动后打开默认浏览器 localhost:8080
-		openPage: "#/dispatch/make",  //在url上添加路径
+		openPage: "#/login",  //在url上添加路径
 		proxy: {  //代理
 			'/api': {
 	            target: 'http://localhost:3000',

@@ -1,42 +1,14 @@
 .box{
-    height:100%; 
-    overflow:hidden;
-    max-width:1920px;
-    margin:0 auto;
+    height:100%;
 
-    .bottom{
+    .nav{
         height:100%;
-        .nav{
-            height:100%;
-            width:200px;
-            float:left;
-        }
-        .container{
-            height:100%;
-            float:right;
-            width:calc(~"100% - 200px");
-            overflow:hidden;
-            position: relative;
-            .container-map, .containerChildren{
-                position: absolute;
-                left:0;
-                right:0;
-                top:0;
-                bottom:0;
-                margin:auto;
-                z-index:100;
-            }
-        }
+        width:200px;
+        float:left;
     }
 
-    .btnss{
-        display:none;
-    }
-
-    .focus{
-        z-index: 101!important;
-        .btnss{
-            display:block;
-        }
+    .container{
+        float:right;
+        width:calc(~"100% - 200px");
     }
 }

@@ -9,7 +9,7 @@ import {getTimeValue} from "public";
 //引入redux
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import * as ActionAll from '../actions/actionAll';
+import * as actionAll from 'actionAll';
 
 class Demo extends React.Component{
     constructor(){
@@ -29,10 +29,6 @@ class Demo extends React.Component{
     }
 
     componentDidMount(){
-        this.props.actionAll.render({
-            loading:false
-        });
-
         this.time = setInterval(this.getTime.bind(this), 1000);
     }
 
@@ -119,19 +115,20 @@ class Demo extends React.Component{
 // -------------------redux react 绑定--------------------
 
 //获取redux里面的值
-function mapStateToProps(state) {
-  return {
-  stateAll: state
-  }
+function mapStateToProps(state){
+    return{
+        stateAll: state
+    }
 }
 
 //设置redux里面的值
-function mapDispatchToProps(dispatch) {
-  return {
-      actionAll: bindActionCreators(ActionAll, dispatch)
-  }
+function mapDispatchToProps(dispatch){
+    return{
+        actionAll: bindActionCreators(actionAll, dispatch)
+    }
 }
+
 export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+    mapStateToProps,
+    mapDispatchToProps
 )(Demo)

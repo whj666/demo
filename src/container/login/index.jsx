@@ -20,9 +20,11 @@ class Login extends React.Component{
         })
     }
 
-    render() {
-        return (
-            <Spin wrapperClassName="spinClass" spinning={this.state.loading} size="large" tip="加载中...">
+    render(){
+        return(
+            <div className="container" id="login">
+                <Spin spinning={this.state.loading}></Spin>
+
                 <div className="loginBox login-form">
                     <div className="bg">
 
@@ -39,7 +41,7 @@ class Login extends React.Component{
                         <p className="copyright">Copyright <i className="anticon anticon-copyright"></i> 2018 JIN</p>
                     </div>
                 </div>
-            </Spin>
+            </div>
         )
     }
 }

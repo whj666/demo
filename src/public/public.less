@@ -21,8 +21,8 @@ a, i{
 }
 
 /**
- * 常用类
- */
+* 常用类
+*/
 
 .cf{
     &:after{
@@ -77,11 +77,20 @@ a, i{
 }
 
 /**
- * 覆盖antd样式
- */
- .spinClass{
-    height:100%;
-    .ant-spin-container{
-      height: 100%;
+* 覆盖antd样式
+*/
+.container{
+    height: 100%;
+    position: relative;
+
+    .ant-spin-spinning{
+        position: absolute;
+        left:0;right:0;top:0;bottom:0;margin:auto;
+        z-index: 99999;
+        >span{
+            position: absolute;
+            left:0;right:0;top:0;bottom:0;margin:auto;
+        }
     }
-  }
+}
+
