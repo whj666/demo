@@ -17,7 +17,7 @@ app.use(async (ctx) => {
         ctx.body = {flag: true, data: [postData]};
     }else if(ctx.url === '/api/login' && ctx.method === 'POST'){
         let postData = ctx.request.body;
-        let userArr = await findUser();
+        let userArr = await findUser({userName: postData.userName});
 
         if(checkUser(userArr, postData)){
             ctx.body = {flag: true};
@@ -26,7 +26,7 @@ app.use(async (ctx) => {
         }
     }else if(ctx.url === '/api/register' && ctx.method === 'POST'){
         let postData = ctx.request.body;
-        let userArr = await findUser();
+        let userArr = await findUser({userName: postData.newUserName});
 
         if(!checkUserName(userArr, postData)){
             if(await saveUser(postData)){
@@ -40,10 +40,10 @@ app.use(async (ctx) => {
 
 //验证账号密码
 function checkUser(userArr, postData){
-    let res;
+    let res = false;
     for(let i in userArr){
         if(userArr[i].userName === postData.userName){
-            res = userArr[i].password === postData.password ? true : false;
+            res = userArr[i].password === postData.password && true
         }
     }
     return res;
@@ -52,11 +52,9 @@ function checkUser(userArr, postData){
 //注册时，验证账号是否重复
 function checkUserName(userArr, postData){
     let res = false;
-    for(let i in userArr){
-        if(userArr[i].userName === postData.newUserName){
-            res = true;
-        }
-    }
+    res = userArr.some(item => {
+        return item.userName === postData.newUserName;
+    })
     return res;
 }
 
