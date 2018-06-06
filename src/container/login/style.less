@@ -1,61 +1,66 @@
 .loginBox{
-  background-color: #f0f2f5!important;
-  background:url("rivers.jpg") no-repeat center;
-  min-height: 100%;
-  background-size: auto;
-  position: relative;
-  .bg{
-    position: absolute;
-    left:0;
-    right:0;
-    top:0;
-    bottom:0;
-    margin:auto;
-    height: 375px;
-    width:408px;
-    padding:20px 0;
-    background:rgba(255, 255, 255, 0.98);
-    margin:auto;
-  }
-  .title{
-    font-size:30px;
-    color:#108ee9;
-    font-weight: 700;
-    text-align:center;
-    line-height: 100%;
-    margin-bottom:40px;
-  }
-  .form{
-    width:368px;
-    margin: 0 auto;
+    background-color: #f0f2f5!important;
+    background:url("rivers.jpg") no-repeat center;
+    min-height: 100%;
+    background-size: auto;
     position: relative;
-    .form-input-one{
-      height: 40px;
+
+    .bg{
+        position: absolute;
+        left:0;
+        right:0;
+        top:0;
+        bottom:0;
+        margin:auto;
+        height: 325px;
+        width:408px;
+        padding:20px 0;
+        background:rgba(255, 255, 255, 0.98);
+        margin:auto;
+
+        .ant-tabs.ant-tabs-top.ant-tabs-line{
+            text-align: center;
+
+            .ant-tabs-bar{
+                display:inline-block;
+            }
+
+            .ant-tabs-nav .ant-tabs-tab-active{
+                font-weight: bold;
+            }
+        }
+
+        .ant-form-explain{
+            text-align:left;
+        }
+        
+        .ant-tabs-nav .ant-tabs-tab{
+            margin:0;
+            padding: 12px 25px;
+        }
     }
-    .radio{
-      overflow:hidden;
-      margin-bottom:22px;
-      span{
-        font-size:14px;
-        padding-right: 0;
-      }
+
+    .form{
+        width:368px;
+        margin: 8px auto 0;
+        position: relative;
+        .form-input-one{
+            height: 40px;
+        }
+
+        button{
+            width:100%;
+            height: 40px!important;
+        }
     }
-    button{
-      width:100%;
-      height: 40px!important;
-    }
+
     .copyright{
-      margin-top:40px;
-      text-align:center;
-      color:rgba(0, 0, 0, 0.45);
-      font-size:14px;
-      line-height:100%;
+        position: absolute;
+        bottom:0;
+        left:0;
+        width:100%;
+        text-align:center;
+        color:rgba(0, 0, 0, 0.45);
+        line-height:100%;
     }
-  }
-}
-.spinClass{
-  height:100%;
-  .ant-spin-container{
-    height: 100%;
-  }
 }

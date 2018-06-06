@@ -1,15 +1,8 @@
 const Koa = require('koa');
 const app = new Koa();
 const bodyParser = require('koa-bodyparser');
-const connectDB = require('./connectDB.js');
-const getDocuments = require('./getDocuments.js');
-const dbName = 'admin';
-
-const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/test');
-const Cat = mongoose.model('Cat', { name: String });
-const kitty = new Cat({ name: 'Zildjian' });
-kitty.save().then(() => console.log('meow'));
+const findUser = require('./findUser.js');
+const saveUser = require('./saveUser.js');
 
 //使用ctx.body解析中间件 (当POST请求的时候，中间件koa-bodyparser解析POST传递的数据，并显示出来)
 app.use(bodyParser())
@@ -24,19 +17,25 @@ app.use(async (ctx) => {
         ctx.body = {flag: true, data: [postData]};
     }else if(ctx.url === '/api/login' && ctx.method === 'POST'){
         let postData = ctx.request.body;
-        let options = {
-            handle: getDocuments,
-            dbName,
-            siteName: "col",
-            findTips: {}
-        };
+        let userArr = await findUser();
 
-        if(checkUser(await connectDB(options), postData)){
+        if(checkUser(userArr, postData)){
             ctx.body = {flag: true};
         }else{
             ctx.body = {flag: false, message: "账号密码错误！"};
         }
-    };
+    }else if(ctx.url === '/api/register' && ctx.method === 'POST'){
+        let postData = ctx.request.body;
+        let userArr = await findUser();
+
+        if(!checkUserName(userArr, postData)){
+            if(await saveUser(postData)){
+                ctx.body = {flag: true, message: "注册成功！"};
+            };
+        }else{
+            ctx.body = {flag: false, message: "账号已经存在！"};
+        }
+    }
 })
 
 //验证账号密码
@@ -45,6 +44,17 @@ function checkUser(userArr, postData){
     for(let i in userArr){
         if(userArr[i].userName === postData.userName){
             res = userArr[i].password === postData.password ? true : false;
+        }
+    }
+    return res;
+}
+
+//注册时，验证账号是否重复
+function checkUserName(userArr, postData){
+    let res = false;
+    for(let i in userArr){
+        if(userArr[i].userName === postData.newUserName){
+            res = true;
         }
     }
     return res;
