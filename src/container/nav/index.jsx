@@ -1,13 +1,12 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
-import { Menu, Icon } from 'antd';
+import {NavLink} from 'react-router-dom';
+import {Menu, Icon} from 'antd';
 import './style';
 
-import { withRouter } from 'react-router-dom';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import * as ActionAll from '../actions/actionAll';
-
+//引入redux
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
+import * as actionAll from 'actionAll';
 
 class Nav extends React.Component {
     constructor(props) {
@@ -26,26 +25,6 @@ class Nav extends React.Component {
     }
 
     onSelect(item) {
-        let key = item.key;
-        let moduleParams = key.substr(key.indexOf('/') + 1);
-        let moduleObjs = key.substr(key.indexOf('/') + 1, key.lastIndexOf('/')-1);
-        let moduleParamsArr = moduleParams.split('/');
-
-        sessionStorage.setItem('initPageParams', true);
-
-        //初始化全局当前模块的id，并设置一级模块的id
-        const currentModuleId = sessionStorage.getItem('currentModuleId');
-        let moduleId = currentModuleId ? currentModuleId : '';
-        if (moduleId) {
-            sessionStorage.setItem('currentModuleId', JSON.stringify(moduleObjs));
-        } else {
-            sessionStorage.setItem('currentModuleId', 'dispatch');
-        }
-        this.props.ActionAll.setCurrentModule({
-            childModuleId: moduleParamsArr[1],
-            moduleId: moduleParamsArr[0]
-        })
-
         this.setState({
             selectedKeys: [item.key]
         });
@@ -99,11 +78,11 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        ActionAll: bindActionCreators(ActionAll, dispatch),
+        ActionAll: bindActionCreators(actionAll, dispatch),
     };
 }
 
-export default withRouter(connect(
+export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(Nav));
+)(Nav);
