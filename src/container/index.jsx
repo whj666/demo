@@ -2,6 +2,7 @@ import './style';
 import React from 'react';
 import {Spin} from 'antd';
 import Nav from './nav';
+import Top from './top'
 import {Switch, Route, withRouter} from "react-router-dom";
 import NotFound from "./error";
 import Demo from "./body/demo";
@@ -16,12 +17,21 @@ class Box extends React.Component{
                         <Nav hash={hash} openKeys={openKeys} />
                     </div>
 
-                    <div className="container" id="container">
-                        <Switch>
-                            <Route path="/demo" component={Demo} />
-                            <Route component={NotFound} />
-                        </Switch>
-                        <Spin spinning={false}></Spin>
+                    <div className="box-right">
+                        <div className="top">
+                            <Top />
+                        </div>
+
+                        <div className="container" id="container">
+                            <div className="container-box">
+                                <Switch>
+                                    <Route path="/demo" component={Demo} />
+                                    <Route component={NotFound} />
+                                </Switch>
+                            </div>
+                            
+                            <Spin spinning={false}></Spin>
+                        </div>
                     </div>
                 </div>
             </React.Fragment>
