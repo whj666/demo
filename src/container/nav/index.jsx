@@ -67,6 +67,7 @@ class Nav extends React.Component{
                     <Menu
                         mode="inline"
                         inlineCollapsed={true}
+                        theme="dark"
                         selectedKeys={this.state.selectedKeys}
                         onOpenChange={this.onOpenChange.bind(this)}
                         onSelect={this.onSelect.bind(this)}
@@ -77,6 +78,7 @@ class Nav extends React.Component{
                     <Menu
                         mode="inline"
                         inlineCollapsed={false}
+                        theme="dark"
                         openKeys={this.state.openKeys}
                         selectedKeys={this.state.selectedKeys}
                         onOpenChange={this.onOpenChange.bind(this)}
