@@ -46,7 +46,7 @@ class Nav extends React.Component{
     handleMenuList(menuList){
         return menuList.list.map((item, index) => {
             return(
-                <Menu.SubMenu key={item.key} title={<span><Icon type={item.icon} /><span>{item.title}</span></span>}>
+                <Menu.SubMenu key={item.key} title={<span><Icon type={item.icon} /><span style={{paddingRight: 62}}>{item.title}</span></span>}>
                     {this.handleChildrenMenu(item.children)}
                 </Menu.SubMenu>
             )
