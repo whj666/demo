@@ -9,31 +9,33 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import * as actionAll from 'actionAll';
 
-class Nav extends React.Component {
-    constructor(props) {
+class Nav extends React.Component{
+    constructor(props){
         super(props);
         this.state = {
+            collapsed: false,
             openKeys: [props.openKeys],
             selectedKeys: [props.hash]
         };
     }
 
-    componentWillReceiveProps(nextProps) {
+    componentWillReceiveProps(nextProps){
         this.setState({
             openKeys: [nextProps.openKeys],
-            selectedKeys: [nextProps.hash]
+            selectedKeys: [nextProps.hash],
+            collapsed: nextProps.stateAll.common.collapsed
         });
     }
 
     //点击菜单
-    onSelect(item) {
+    onSelect(item){
         this.setState({
             selectedKeys: [item.key]
         });
     }
 
     //点开菜单标题
-    onOpenChange(openKeys) {
+    onOpenChange(openKeys){
         let newKeys = openKeys[openKeys.length - 1];
         this.setState({
             openKeys: [newKeys]
@@ -58,30 +60,45 @@ class Nav extends React.Component {
         })
     }
 
-    render() {
-        return (
+    render(){
+        return(
             <div className="side-nav">
-                <Menu
-                    mode="inline"
-                    openKeys={this.state.openKeys}
-                    selectedKeys={this.state.selectedKeys}
-                    onOpenChange={this.onOpenChange.bind(this)}
-                    onSelect={this.onSelect.bind(this)}
-                >
-                    {this.handleMenuList(menuList)}
-                </Menu>
+                {this.state.collapsed ?
+                    <Menu
+                        mode="inline"
+                        inlineCollapsed={true}
+                        selectedKeys={this.state.selectedKeys}
+                        onOpenChange={this.onOpenChange.bind(this)}
+                        onSelect={this.onSelect.bind(this)}
+                    >
+                        {this.handleMenuList(menuList)}
+                    </Menu>
+                    :
+                    <Menu
+                        mode="inline"
+                        inlineCollapsed={false}
+                        openKeys={this.state.openKeys}
+                        selectedKeys={this.state.selectedKeys}
+                        onOpenChange={this.onOpenChange.bind(this)}
+                        onSelect={this.onSelect.bind(this)}
+                    >
+                        {this.handleMenuList(menuList)}
+                    </Menu>
+                }
             </div>
         );
     }
 }
 
-function mapStateToProps(state) {
-    return {};
+function mapStateToProps(state){
+    return {
+        stateAll: state
+    };
 }
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps(dispatch){
     return {
-        ActionAll: bindActionCreators(actionAll, dispatch),
+        actionAll: bindActionCreators(actionAll, dispatch),
     };
 }
 

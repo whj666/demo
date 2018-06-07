@@ -1,10 +1,21 @@
-import React from 'react'
-import './style.less'
-import {Icon, Breadcrumb} from 'antd'
+import React from 'react';
+import './style.less';
+import {Icon, Breadcrumb} from 'antd';
+
+//引入redux
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
+import * as actionAll from 'actionAll';
 
 class Top extends React.Component{
     constructor(props){
         super();
+    }
+
+    collapsed(){
+        this.props.actionAll.collapsed({
+            collapsed: !this.props.stateAll.common.collapsed
+        })
     }
 
     render(){
@@ -12,7 +23,7 @@ class Top extends React.Component{
         	<div className="topBox">
                 <div className="topBox-nav cb">
                     <div className="icon fl">
-                        <Icon type="menu-fold" />
+                        <Icon onClick={this.collapsed.bind(this)} type="menu-fold" />
                     </div>
 
                     <div className="fl f16 systemName">CMS SYSTEM</div>
@@ -35,4 +46,19 @@ class Top extends React.Component{
     }
 }
 
-export default Top
+function mapStateToProps(state){
+    return {
+        stateAll: state
+    };
+}
+
+function mapDispatchToProps(dispatch){
+    return {
+        actionAll: bindActionCreators(actionAll, dispatch),
+    };
+}
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Top)

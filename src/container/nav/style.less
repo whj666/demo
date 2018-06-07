@@ -4,21 +4,27 @@
     overflow-x:hidden;
     background:#638ee1 url(./side-nav-bg.png) no-repeat center bottom;
     background-size:100% auto;
+
     .ant-menu{
         background:transparent;
+
         .ant-menu-inline .ant-menu-item{
             margin-top:0!important;
             margin-bottom:0!important;
+
             a{
                 color:#fff;
             }
         }
+
         li{
             position: relative;
         }
+
         span{
             color:#fff;
         }
+
         a{
             color:#fff;
             position: absolute;
@@ -29,19 +35,26 @@
             margin:auto;
             padding-left:48px;
         }
+
         .ant-menu-submenu-arrow:after, .ant-menu-submenu-arrow:before{
             background: -webkit-gradient(linear, left top, right top, from(#fff), to(#fff))!important;
             background: -webkit-linear-gradient(left, #fff, #fff)!important;
             background: linear-gradient(to right, #fff, #fff)!important;
         }
     }
+
     .ant-menu-submenu-open > ul{
         background:#50629b;
         li.ant-menu-item-selected{
             background-color:#96b1e6;
         }
     }
+
     .ant-menu-inline, .ant-menu-vertical{
         border:none;
+    }
+
+    .ant-menu-item{
+        width:200px;
     }
 }

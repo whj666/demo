@@ -1,20 +1,9 @@
 import React from 'react'
 import './style'
 
-//引入redux
-import {bindActionCreators} from 'redux';
-import {connect} from 'react-redux';
-import * as ActionAll from '../actions/actionAll';
-
 class NotFound extends React.Component{
     constructor(props) {
         super(props);
-    }
-
-    componentDidMount(){
-        this.props.actionAll.render({
-			loading:false
-		});
     }
     
     render() {
@@ -31,22 +20,4 @@ class NotFound extends React.Component{
     }
 }
 
-// -------------------redux react 绑定--------------------
-
-//获取redux里面的值
-function mapStateToProps(state) {
-    return {
-        stateAll: state
-    }
-  }
-  
-  //设置redux里面的值
-  function mapDispatchToProps(dispatch) {
-    return {
-        actionAll: bindActionCreators(ActionAll, dispatch)
-    }
-  }
-  export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(NotFound);
+export default NotFound;

@@ -6,7 +6,7 @@ import Top from './top'
 import {Switch, Route, withRouter} from "react-router-dom";
 import NotFound from "./error";
 import Demo from "./body/demo";
-import {hash, openKeys} from "./nav/active";
+import routerNav from "./nav/active";
 
 class Box extends React.Component{
     render(){
@@ -14,7 +14,7 @@ class Box extends React.Component{
             <React.Fragment>
                 <div className="box">
                     <div className="nav">
-                        <Nav hash={hash} openKeys={openKeys} />
+                        <Nav hash={routerNav()[0]} openKeys={routerNav()[1]} />
                     </div>
 
                     <div className="box-right">

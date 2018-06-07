@@ -5,8 +5,8 @@ import * as actionTypeAll from '../constants/actionTypeAll';
  */
 export function common(state={}, action){
     switch(action.type){
-        case actionTypeAll.render:
-            return Object.assign({}, state, {render:action.data})
+        case actionTypeAll.collapsed:
+            return Object.assign({}, state, {collapsed: action.data.collapsed})
         default:
             return state
     }

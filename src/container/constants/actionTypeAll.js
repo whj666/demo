@@ -2,4 +2,4 @@
 /**
  * 公共
  */
-export const render = "render";
+export const collapsed = "collapsed";

@@ -3,9 +3,9 @@ import * as actionTypeAll from '../constants/actionTypeAll';
 /**
  * 公共
  */
-export function render(data){
+export function collapsed(data){
     return{
-        type: actionTypeAll.render,
+        type: actionTypeAll.collapsed,
         data
     }
 }

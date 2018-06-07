@@ -1,14 +1,14 @@
-let openKeys = null;
-let hash = location.hash.substr(1);
-let titleKeyArr = ["dispatch", "prediction", "settinglist"];
+export default function routerNav (){
+    let openKeys = null;
+    let hash = location.hash.substr(1);
+    let titleKeyArr = ["dispatch", "prediction", "settinglist"];
 
-titleKeyArr.forEach(item => {
-    if(hash.includes(item)){
-        openKeys = item;
-    }
-})
+    titleKeyArr.forEach(item => {
+        if(hash.includes(item)){
+            openKeys = item;
+        }
+    })
 
-export {
-    hash,
-    openKeys
+    return [hash, openKeys]
 }
+    
