@@ -46,10 +46,10 @@ class TableMoudel extends React.Component{
                 width: '20%',
                 render: (text, record) => (
                     <span>
-                        <a href="javascript:void(0);" onClick={() => this.edit(record)}>查看 </a>
+                        <a href="javascript:void(0);" onClick={() => this.edit(record)}>编辑</a>
                         <Divider type="vertical" />
                         <Popconfirm title="是否确定删除">
-                            <a href="javascript:void(0);"> 删除</a>
+                            <a href="javascript:void(0);">删除</a>
                         </Popconfirm>
                     </span>
                 )

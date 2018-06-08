@@ -45,7 +45,7 @@ class SearchBar extends React.Component{
         return(
             <div className="searchBar oh">
                 <Form className="fl" layout="inline" onSubmit={this.handleSubmit.bind(this)}>
-                    <FormItem label='用户名' >
+                    <FormItem label='姓名' >
                         {this.props.form.getFieldDecorator('name', {
                             initialValue: ""
                         })(
