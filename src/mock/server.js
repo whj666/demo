@@ -1,8 +1,8 @@
 const Koa = require('koa');
 const app = new Koa();
 const bodyParser = require('koa-bodyparser');
-const findUser = require('./findUser.js');
-const saveUser = require('./saveUser.js');
+const findUser = require('./login/findUser.js');
+const saveUser = require('./login/saveUser.js');
 
 //使用ctx.body解析中间件 (当POST请求的时候，中间件koa-bodyparser解析POST传递的数据，并显示出来)
 app.use(bodyParser())

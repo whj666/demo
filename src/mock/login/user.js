@@ -1,7 +1,7 @@
 /**
  * 用户信息
  */
-const mongoose = require('./db.js');
+const mongoose = require('../db.js');
 const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({          
@@ -9,4 +9,4 @@ const UserSchema = new Schema({
     password: String                                      
 });
 
-module.exports = mongoose.model('col', UserSchema);
+module.exports = mongoose.model('user', UserSchema);
