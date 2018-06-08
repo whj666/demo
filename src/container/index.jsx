@@ -7,6 +7,7 @@ import {Switch, Route, withRouter} from "react-router-dom";
 import NotFound from "./error";
 import Demo from "./body/demo";
 import routerNav from "./nav/active";
+import Table from "./body/table"
 
 class Box extends React.Component{
     render(){
@@ -26,6 +27,7 @@ class Box extends React.Component{
                             <div className="container-box">
                                 <Switch>
                                     <Route path="/demo" component={Demo} />
+                                    <Route path="/table/curd" component={Table} />
                                     <Route component={NotFound} />
                                 </Switch>
                             </div>

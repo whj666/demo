@@ -1,11 +1,11 @@
 export default {
     "list": [{
-        "key": "dispatch",
+        "key": "table",
         "icon": "logout",
-        "title": "水库调度",
+        "title": "表格控件",
         "children": [{
-            "key": "/dispatch/make",
-            "name": "方案制作"
+            "key": "/table/curd",
+            "name": "增删查改"
         },{
             "key": "/dispatch/administration",
             "name": "方案管理"

@@ -16,7 +16,8 @@ module.exports = {
 			api: path.resolve(__dirname, 'src/fetch/api'),  //使用绝对路径
 			urls: path.resolve(__dirname, 'src/fetch/url'),
 			public: path.resolve(__dirname, 'src/public/public.js'),
-			actionAll: path.resolve(__dirname, 'src/container/actions/actionAll')
+			actionAll: path.resolve(__dirname, 'src/container/actions/actionAll'),
+			rightModal: path.resolve(__dirname, 'src/components/rightModal')
 		}
 	},
 
