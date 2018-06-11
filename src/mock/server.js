@@ -8,7 +8,7 @@ const saveUser = require('./login/saveUser.js');
 const {checkUser, checkUserName} = require('./login/action.js');
 
 //table
-const tableNewUser = require('./table/newUser.js');
+const tableSaveUser = require('./table/saveUser.js');
 const tableFindUser = require('./table/findUser.js');
 
 //使用ctx.body解析中间件 (当POST请求的时候，中间件koa-bodyparser解析POST传递的数据，并显示出来)
@@ -47,6 +47,14 @@ app.use(async (ctx) => {
         let query = request.query;
         let userArr = await tableFindUser(query);
         ctx.body = {flag: true, data: userArr};
+    }else if(ctx.url === '/api/saveTableEdit' && ctx.method === 'POST'){
+        let postData = ctx.request.body;
+        let res = await tableSaveUser(postData);
+        if(res.ok){
+            ctx.body = {flag: true, message: "保存成功！"};
+        }else{
+            ctx.body = {flag: false, message: "保存失败！"};
+        }
     }
 })
 

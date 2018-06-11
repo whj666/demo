@@ -70,16 +70,18 @@ class TableMoudel extends React.Component{
     getTableData(option){
         getApi(option, urls.getTableData, res => {
             let tableData = [];
-            let userList = res.data.userList;
-            for(let i in userList){
-                tableData.push({
-                    key:i,
-                    name: userList[i].name,
-                    age: userList[i].age,
-                    type: userList[i].type,
-                    email: userList[i].email,
-                    id: userList[i].id
-                });
+            if(res.data && res.data.userList){
+                let userList = res.data.userList;
+                for(let i in userList){
+                    tableData.push({
+                        key:i,
+                        name: userList[i].name,
+                        age: userList[i].age,
+                        type: userList[i].type,
+                        email: userList[i].email,
+                        id: userList[i].id
+                    });
+                };
             };
 
             this.setState({
@@ -160,6 +162,7 @@ class TableMoudel extends React.Component{
                         <NewTable 
                             key="NewTable"
                             rightModalHandle={this.visibleHandle.bind(this)}
+                            getTableData={this.getTableData.bind(this)}
                             data={this.state.modal}
                         />
                     }

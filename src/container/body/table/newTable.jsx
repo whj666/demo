@@ -1,6 +1,8 @@
 import React from "react";
-import {Form, Button, Input, Select, InputNumber, AutoComplete} from 'antd';
+import {Form, Button, Input, Select, InputNumber, Message, AutoComplete} from 'antd';
 import RightModal from "rightModal";
+import {urls} from "urls";
+import {postApi} from "api";
 
 const FormItem = Form.Item;
 const Option = Select.Option;
@@ -25,7 +27,13 @@ class NewTable extends React.Component{
         this.props.form.validateFieldsAndScroll((err, values) => {
             if (!err) {
                 values.id = this.state.data && this.state.data.id;
-                console.log(values);
+                values.userName = localStorage.userName;
+
+                postApi(values, urls.saveTableEdit, res => {
+                    this.props.getTableData({userName:localStorage.userName});
+                    this.props.rightModalHandle();
+                    Message.success(res.message);
+                })
             }
         })
     }
@@ -104,9 +112,9 @@ class NewTable extends React.Component{
                                     optionFilterProp="children"
                                     filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
                                 >   
-                                    <Option value="gfs">高富帅</Option>
-                                    <Option value="bfm">白富美</Option>
-                                    <Option value="cds">臭屌丝</Option>
+                                    <Option value="高富帅">高富帅</Option>
+                                    <Option value="白富美">白富美</Option>
+                                    <Option value="臭屌丝">臭屌丝</Option>
                                 </Select>
                             )}
                         </FormItem>

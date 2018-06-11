@@ -3,5 +3,6 @@ export const urls = {
     getApi: '/api/get',
     login: '/api/login',
     register: '/api/register',
-    getTableData: '/api/getTableData'
+    getTableData: '/api/getTableData',
+    saveTableEdit: '/api/saveTableEdit'
 };
