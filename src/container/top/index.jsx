@@ -12,14 +12,14 @@ class Top extends React.Component{
         super();
 
         this.state = {
-            flag: false
+            flag: Boolean(Number(localStorage.collapsed))
         }
     }
 
     //菜单收起展开
     collapsed(){
         this.props.actionAll.collapsed({
-            collapsed: !this.props.stateAll.common.collapsed
+            collapsed: !this.state.flag
         })
 
         this.setState({

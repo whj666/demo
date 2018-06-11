@@ -13,7 +13,7 @@ class Nav extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            collapsed: false,
+            collapsed: Boolean(Number(localStorage.collapsed)),
             openKeys: [props.openKeys],
             selectedKeys: [props.hash]
         };
