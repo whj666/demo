@@ -15,7 +15,7 @@ class LoginIndex extends React.Component{
                     password: values.password
                 }
 
-                postApi(options, urls.login, (res) => {
+                postApi(options, urls.login, res => {
                     localStorage.userName = values.userName;
                     this.props.history.push("/demo");
                 })

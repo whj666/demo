@@ -16,7 +16,7 @@ class NewTable extends React.Component{
     }
 
     componentDidMount(){
-        
+
     }
 
     //确定保存
@@ -24,6 +24,7 @@ class NewTable extends React.Component{
         e.preventDefault();
         this.props.form.validateFieldsAndScroll((err, values) => {
             if (!err) {
+                values.id = this.state.data && this.state.data.id;
                 console.log(values);
             }
         })

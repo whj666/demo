@@ -46,7 +46,7 @@ class Top extends React.Component{
                         <Icon onClick={this.signOut.bind(this)} type="logout" />
                     </div>
 
-                    <div className="fr userName f16">admin</div>
+                    <div className="fr userName f16">{localStorage.userName}</div>
                 </div>
 
                 <div className="bread">
