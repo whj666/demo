@@ -1,8 +1,15 @@
 const Koa = require('koa');
 const app = new Koa();
 const bodyParser = require('koa-bodyparser');
+
+//login
 const findUser = require('./login/findUser.js');
 const saveUser = require('./login/saveUser.js');
+const {checkUser, checkUserName} = require('./login/action.js');
+
+//table
+const tableNewUser = require('./table/newUser.js');
+const tableFindUser = require('./table/findUser.js');
 
 //使用ctx.body解析中间件 (当POST请求的时候，中间件koa-bodyparser解析POST传递的数据，并显示出来)
 app.use(bodyParser())
@@ -35,28 +42,13 @@ app.use(async (ctx) => {
         }else{
             ctx.body = {flag: false, message: "账号已经存在！"};
         }
+    }else if(ctx.url.substring(0, ctx.url.indexOf("?")) === '/api/getTableData' && ctx.method === 'GET'){
+        let request = ctx.request;
+        let query = request.query;
+        let userArr = await tableFindUser(query);
+        ctx.body = {flag: true, data: userArr};
     }
 })
-
-//验证账号密码
-function checkUser(userArr, postData){
-    let res = false;
-    for(let i in userArr){
-        if(userArr[i].userName === postData.userName){
-            res = userArr[i].password === postData.password && true
-        }
-    }
-    return res;
-}
-
-//注册时，验证账号是否重复
-function checkUserName(userArr, postData){
-    let res = false;
-    res = userArr.some(item => {
-        return item.userName === postData.newUserName;
-    })
-    return res;
-}
 
 app.listen(3000, () => {
     console.log('sever is starting at port 3000');

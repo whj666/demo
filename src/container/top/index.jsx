@@ -12,14 +12,14 @@ class Top extends React.Component{
         super();
 
         this.state = {
-            flag: false
+            flag: Boolean(Number(localStorage.collapsed))
         }
     }
 
     //菜单收起展开
     collapsed(){
         this.props.actionAll.collapsed({
-            collapsed: !this.props.stateAll.common.collapsed
+            collapsed: !this.state.flag
         })
 
         this.setState({
@@ -46,7 +46,7 @@ class Top extends React.Component{
                         <Icon onClick={this.signOut.bind(this)} type="logout" />
                     </div>
 
-                    <div className="fr userName f16">admin</div>
+                    <div className="fr userName f16">{localStorage.userName}</div>
                 </div>
 
                 <div className="bread">

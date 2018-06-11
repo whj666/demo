@@ -1,7 +1,7 @@
 import React from "react";
 import {Form, Button, Input, Popconfirm, Table, Divider} from 'antd';
 import QueueAnim from 'rc-queue-anim';
-import {postApi} from "api";
+import {getApi, postApi} from "api";
 import {urls} from "urls";
 import SearchBar from "./searchBar";
 import RightModal from "rightModal";
@@ -59,26 +59,33 @@ class TableMoudel extends React.Component{
 
     componentDidMount(){
         window.addEventListener('resize', this.handleHeight.bind(this));
-
-        let tableData = [];
-        for(let i=1; i<=500; i++){
-            tableData.push({
-                key:i,
-                name: "渣渣辉",
-                age: i,
-                type: "高富帅",
-                email: "1010349053@qq.com",
-                id: i
-            })
-        };
-
-        this.setState({
-            tableData
-        })
+        this.getTableData({userName:localStorage.userName});
     }
 
     componentWillUnmount() {
         window.removeEventListener('resize', this.handleHeight.bind(this));
+    }
+
+    //查询数据
+    getTableData(option){
+        getApi(option, urls.getTableData, res => {
+            let tableData = [];
+            let userList = res.data.userList;
+            for(let i in userList){
+                tableData.push({
+                    key:i,
+                    name: userList[i].name,
+                    age: userList[i].age,
+                    type: userList[i].type,
+                    email: userList[i].email,
+                    id: userList[i].id
+                });
+            };
+
+            this.setState({
+                tableData
+            });
+        })
     }
 
     //获取浏览器高度
