@@ -1,5 +1,5 @@
 import React from "react";
-import {Form, Button, Input, Popconfirm, Table, Divider} from 'antd';
+import {Form, Button, Input, Popconfirm, Table, Divider, Message} from 'antd';
 import QueueAnim from 'rc-queue-anim';
 import {getApi, postApi} from "api";
 import {urls} from "urls";
@@ -48,7 +48,7 @@ class TableMoudel extends React.Component{
                     <span>
                         <a href="javascript:void(0);" onClick={() => this.edit(record)}>编辑</a>
                         <Divider type="vertical" />
-                        <Popconfirm title="是否确定删除">
+                        <Popconfirm title="是否确定删除" onConfirm={() => this.delete(record)}>
                             <a href="javascript:void(0);">删除</a>
                         </Popconfirm>
                     </span>
@@ -59,19 +59,27 @@ class TableMoudel extends React.Component{
 
     componentDidMount(){
         window.addEventListener('resize', this.handleHeight.bind(this));
-        this.getTableData({userName:localStorage.userName});
+        this.ref.handleSubmit();
     }
 
     componentWillUnmount() {
         window.removeEventListener('resize', this.handleHeight.bind(this));
     }
 
+    //删除数据
+    delete = (record) => {
+        postApi({_id: record._id}, urls.deleteTableData, res => {
+            this.ref.handleSubmit();
+            Message.success(res.message);
+        })
+    }
+
     //查询数据
     getTableData(option){
         getApi(option, urls.getTableData, res => {
             let tableData = [];
-            if(res.data && res.data.userList){
-                let userList = res.data.userList;
+            if(res.data){
+                let userList = res.data;
                 for(let i in userList){
                     tableData.push({
                         key:i,
@@ -79,7 +87,7 @@ class TableMoudel extends React.Component{
                         age: userList[i].age,
                         type: userList[i].type,
                         email: userList[i].email,
-                        id: userList[i].id
+                        _id: userList[i]._id
                     });
                 };
             };
@@ -126,18 +134,18 @@ class TableMoudel extends React.Component{
 
     //编辑
     edit(record){
-        let {name, age, type, email, id} = record;
+        let {name, age, type, email, _id} = record;
         this.setState({
-            modal: Object.assign({}, {name, age, type, email, id})
+            modal: Object.assign({}, {name, age, type, email, _id})
         },() => {
-            this.visibleHandle(id);
+            this.visibleHandle(_id);
         })
     }
   
     render(){
         return(
             <div className="tableMoudel h100">
-                <SearchBar this={this} />
+                <SearchBar wrappedComponentRef={ref => {this.ref = ref}} getTableData={this.getTableData.bind(this)} this={this} />
 
                 <Table 
                     className="mt10"
@@ -162,7 +170,7 @@ class TableMoudel extends React.Component{
                         <NewTable 
                             key="NewTable"
                             rightModalHandle={this.visibleHandle.bind(this)}
-                            getTableData={this.getTableData.bind(this)}
+                            getTableData={this.ref.handleSubmit}
                             data={this.state.modal}
                         />
                     }

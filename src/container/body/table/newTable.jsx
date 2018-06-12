@@ -26,11 +26,13 @@ class NewTable extends React.Component{
         e.preventDefault();
         this.props.form.validateFieldsAndScroll((err, values) => {
             if (!err) {
-                values.id = this.state.data && this.state.data.id;
                 values.userName = localStorage.userName;
+                if(this.state.data._id){
+                    values._id = this.state.data._id;
+                }
 
                 postApi(values, urls.saveTableEdit, res => {
-                    this.props.getTableData({userName:localStorage.userName});
+                    this.props.getTableData();
                     this.props.rightModalHandle();
                     Message.success(res.message);
                 })
@@ -91,7 +93,7 @@ class NewTable extends React.Component{
                             label='年龄'
                         >
                             {this.props.form.getFieldDecorator('age', {
-                                initialValue:this.state.data.age || "",
+                                initialValue:this.state.data.age == null ? "" : this.state.data.age,
                                 rules: [{ required: true, message: "不能为空！" }]
                             })(
                                 <InputNumber className="w100" placeholder="请输入" />

@@ -4,9 +4,12 @@
 const mongoose = require('../db.js');
 const Schema = mongoose.Schema;
 
-const UserSchema = new Schema({          
-    userName: String,
-    userList: []
+const UserSchema = new Schema({    
+    name: String,
+    age: Number,
+    type: String,
+    email: String,
+    userName: String
 });
 
 module.exports = mongoose.model('table', UserSchema);

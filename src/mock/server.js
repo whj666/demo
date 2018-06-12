@@ -10,6 +10,7 @@ const {checkUser, checkUserName} = require('./login/action.js');
 //table
 const tableSaveUser = require('./table/saveUser.js');
 const tableFindUser = require('./table/findUser.js');
+const deleteUser = require('./table/deleteUser.js');
 
 //使用ctx.body解析中间件 (当POST请求的时候，中间件koa-bodyparser解析POST传递的数据，并显示出来)
 app.use(bodyParser())
@@ -43,18 +44,33 @@ app.use(async (ctx) => {
             ctx.body = {flag: false, message: "账号已经存在！"};
         }
     }else if(ctx.url.substring(0, ctx.url.indexOf("?")) === '/api/getTableData' && ctx.method === 'GET'){
+        //查询
         let request = ctx.request;
         let query = request.query;
         let userArr = await tableFindUser(query);
-        ctx.body = {flag: true, data: userArr};
+        if(userArr){
+            ctx.body = {flag: true, data: userArr};
+        }else{
+            ctx.body = {flag: false, message: "查询失败！"};
+        };
     }else if(ctx.url === '/api/saveTableEdit' && ctx.method === 'POST'){
+        //新建&编辑保存
         let postData = ctx.request.body;
         let res = await tableSaveUser(postData);
-        if(res.ok){
+        if(res){
             ctx.body = {flag: true, message: "保存成功！"};
         }else{
             ctx.body = {flag: false, message: "保存失败！"};
         }
+    }else if(ctx.url === '/api/deleteTableData' && ctx.method === 'POST'){
+        //删除
+        let postData = ctx.request.body;
+        let res = await deleteUser(postData);
+        if(res.ok){
+            ctx.body = {flag: true, message: "删除成功！"};
+        }else{
+            ctx.body = {flag: false, message: "删除失败！"};
+        };
     }
 })
 
