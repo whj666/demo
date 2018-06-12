@@ -8,7 +8,7 @@ import RightModal from "rightModal";
 import NewTable from "./newTable";
 import {getViewPort} from 'public';
 
-class TableMoudel extends React.Component{
+class Curd extends React.Component{
     constructor(props){
         super(props);
 
@@ -192,4 +192,4 @@ class TableMoudel extends React.Component{
     }
 }
 
-export default TableMoudel
+export default Curd

@@ -2,15 +2,16 @@ import './style';
 import React from 'react';
 import {Spin} from 'antd';
 import Nav from './nav';
-import Top from './top'
-import {Switch, Route, withRouter} from "react-router-dom";
+import Top from './top';
+import {Switch, Route} from "react-router-dom";
 import NotFound from "./error";
 import Demo from "./body/demo";
 import routerNav from "./nav/active";
-import Table from "./body/table"
+import Curd from "./body/funModule/curd";
 
 class Box extends React.Component{
     render(){
+        let hash = location.hash.substr(2).split("/");
         return(
             <React.Fragment>
                 <div className="box">
@@ -20,14 +21,14 @@ class Box extends React.Component{
 
                     <div className="box-right">
                         <div className="top">
-                            <Top />
+                            <Top hash={hash} />
                         </div>
 
                         <div className="container" id="container">
                             <div className="container-box">
                                 <Switch>
                                     <Route path="/demo" component={Demo} />
-                                    <Route path="/table/curd" component={Table} />
+                                    <Route path="/funModule/curd" component={Curd} />
                                     <Route component={NotFound} />
                                 </Switch>
                             </div>

@@ -1,16 +1,16 @@
 export default {
     "list": [{
-        "key": "table",
+        "key": "funModule",
         "icon": "logout",
-        "title": "表格控件",
+        "title": "功能模块",
         "children": [{
-            "key": "/table/curd",
+            "key": "/funModule/curd",
             "name": "增删查改"
         },{
-            "key": "/dispatch/administration",
+            "key": "/funModule/administration",
             "name": "方案管理"
         },{
-            "key": "/dispatch/contrast",
+            "key": "/funModule/contrast",
             "name": "方案对比"
         }]
     },{
@@ -41,5 +41,25 @@ export default {
             "key": "/settinglist/modelSetting",
             "name": "模型配置"
         }]
-    }]
+    }],
+
+    "titleToName": {
+        "funModule": "功能模块", 
+        "prediction": "洪水预报", 
+        "settinglist": "配置列表"
+    },
+
+    "itemToName": {
+        "curd": "增删查改",
+        "administration": "方案管理",
+        "contrast": "方案对比",
+
+        "programManagement": "模型方案管理",
+        "jobForecast": "实时作业预报",
+        "resultManagement": "预报结果管理",
+
+        "objectSetting": "对象配置",
+        "moduleSetting": "模块配置",
+        "modelSetting": "模型配置"
+    }
 }
