@@ -32,10 +32,22 @@ class TableMoudel extends React.Component{
                 title: '年龄',
                 dataIndex: 'age',
                 width: '20%',
+                sorter: (a, b) => a.age - b.age
             },{
                 title: '人设',
                 dataIndex: 'type',
-                width: '20%'
+                width: '20%',
+                filters: [{
+                    text: '高富帅',
+                    value: '高富帅',
+                },{
+                    text: '白富美',
+                    value: '白富美',
+                },{
+                    text: '臭屌丝',
+                    value: '臭屌丝',
+                }],
+                onFilter: (value, record) => record.type.indexOf(value) === 0
             },,{
                 title: '邮箱',
                 dataIndex: 'email',
