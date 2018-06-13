@@ -11,8 +11,10 @@ const findUser = function(option = {}){
         delete option.minAge;
         delete option.maxAge;
 
-        if(option.name === ""){
+        if(!option.name){
             delete option.name;
+        }else{
+            option.name = {$regex: option.name};  //模糊查询
         };
 
         if(minAge){

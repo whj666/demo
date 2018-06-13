@@ -24,6 +24,7 @@ app.use(async (ctx) => {
         let postData = ctx.request.body;
         ctx.body = {flag: true, data: [postData]};
     }else if(ctx.url === '/api/login' && ctx.method === 'POST'){
+        //登陆
         let postData = ctx.request.body;
         let userArr = await findUser({userName: postData.userName});
 
@@ -33,6 +34,7 @@ app.use(async (ctx) => {
             ctx.body = {flag: false, message: "账号密码错误！"};
         }
     }else if(ctx.url === '/api/register' && ctx.method === 'POST'){
+        //注册
         let postData = ctx.request.body;
         let userArr = await findUser({userName: postData.newUserName});
 
