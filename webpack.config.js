@@ -6,7 +6,7 @@ module.exports = {
 	entry: path.resolve(__dirname, 'src/entry.jsx'),
 	output: {
 		filename: "bundle.js",
-		path: path.resolve(__dirname, "./dist")
+		path: path.resolve(__dirname, "./server")
 	},
 
 	//自动解析后缀为下列的格式的文件，意思就是在import引入文件的时候，就不用再写这些后缀了

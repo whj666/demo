@@ -4,14 +4,14 @@ const app = new Koa();
 const bodyParser = require('koa-bodyparser');
 
 //login
-const findUser = require('./login/findUser.js');
-const saveUser = require('./login/saveUser.js');
-const {checkUser, checkUserName} = require('./login/action.js');
+const findUser = require('./app/login/findUser.js');
+const saveUser = require('./app/login/saveUser.js');
+const {checkUser, checkUserName} = require('./app/login/action.js');
 
 //table
-const tableSaveUser = require('./table/saveUser.js');
-const tableFindUser = require('./table/findUser.js');
-const deleteUser = require('./table/deleteUser.js');
+const tableSaveUser = require('./app/table/saveUser.js');
+const tableFindUser = require('./app/table/findUser.js');
+const deleteUser = require('./app/table/deleteUser.js');
 
 app.use(serve('.'));
 

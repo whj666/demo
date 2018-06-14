@@ -1,2 +1,7 @@
 node_modules/
-build/
+server/font/
+server/img/
+server/bundle.js
+server/favicon.ico
+server/index.html
+server/styles.css
