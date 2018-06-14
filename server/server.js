@@ -1,3 +1,4 @@
+const serve = require('koa-static');
 const Koa = require('koa');
 const app = new Koa();
 const bodyParser = require('koa-bodyparser');
@@ -11,6 +12,8 @@ const {checkUser, checkUserName} = require('./login/action.js');
 const tableSaveUser = require('./table/saveUser.js');
 const tableFindUser = require('./table/findUser.js');
 const deleteUser = require('./table/deleteUser.js');
+
+app.use(serve('.'));
 
 //使用ctx.body解析中间件 (当POST请求的时候，中间件koa-bodyparser解析POST传递的数据，并显示出来)
 app.use(bodyParser())
@@ -76,6 +79,6 @@ app.use(async (ctx) => {
     }
 })
 
-app.listen(3000, () => {
-    console.log('sever is starting at port 3000');
+app.listen(8080, () => {
+    console.log('sever is starting at port 8080');
 })

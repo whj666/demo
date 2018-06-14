@@ -55,7 +55,7 @@ module.exports = {
 		openPage: "#/login",  //在url上添加路径
 		proxy: {  //代理
 			'/api': {
-	            target: 'http://localhost:3000',
+	            target: 'http://localhost:8080',
 	            secure: false
 	        }
 		}
