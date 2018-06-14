@@ -29,7 +29,7 @@ class Login extends React.Component{
                     <div className="bg">
 
                         <Tabs defaultActiveKey="1">
-                            <TabPane tab="登陆" key="1">
+                            <TabPane tab="登录" key="1">
                                 <WrappedNormalLoginForm history={this.props.history} />
                             </TabPane>
 

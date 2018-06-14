@@ -6,8 +6,6 @@ import configureStore from './container/store/configureStore';
 import {LocaleProvider} from 'antd';
 import zh_CN from 'antd/lib/locale-provider/zh_CN';
 
-import './static/css/font.css'
-
 render(
     <Provider store={configureStore()}>
         <LocaleProvider locale={zh_CN}>
