@@ -61,12 +61,12 @@ class UserInfo extends React.Component{
 
         const formItemLayout = {
             labelCol: {
-                xs: { span: 3 },
-                sm: { span: 3 },
+                xs: { span: 4 },
+                sm: { span: 4 },
             },
             wrapperCol: {
-                xs: { span: 18 },
-                sm: { span: 18 },
+                xs: { span: 16 },
+                sm: { span: 16 },
             }
         };
 
