@@ -8,6 +8,8 @@ import NotFound from "./error";
 import Demo from "./body/demo";
 import routerNav from "./nav/active";
 import Curd from "./body/funModule/curd";
+import UserInfo from "./body/usercenter/userInfo";
+import SecuritySet from "./body/usercenter/securitySet";
 
 class Box extends React.Component{
     render(){
@@ -29,6 +31,8 @@ class Box extends React.Component{
                                 <Switch>
                                     <Route path="/demo" component={Demo} />
                                     <Route path="/funModule/curd" component={Curd} />
+                                    <Route path="/usercenter/userInfo" component={UserInfo} />
+                                    <Route path="/usercenter/securitySet" component={SecuritySet} />
                                     <Route component={NotFound} />
                                 </Switch>
                             </div>

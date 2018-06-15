@@ -67,12 +67,12 @@ class SearchBar extends React.Component{
                     </FormItem>
 
                     <FormItem>
-                        <Button type="primary" onClick={this.handleSubmit}>查询</Button>
+                        <Button type="primary" icon="search" onClick={this.handleSubmit}>查询</Button>
                         <Button className="ml10" onClick={this.reset.bind(this)}>重置</Button>
                     </FormItem>
                 </Form>
 
-                <Button className="fr" type="primary" onClick={this.new.bind(this)}>新建</Button>
+                <Button icon="profile" className="fr" type="primary" onClick={this.new.bind(this)}>新建</Button>
             </div>
         );
     }

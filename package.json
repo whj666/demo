@@ -4,7 +4,6 @@
   "description": "",
   "main": "bundle.js",
   "scripts": {
-    "server": "nodemon ./server/server.js",
     "start": "webpack-dev-server --mode development",
     "build": "webpack --mode production"
   },
