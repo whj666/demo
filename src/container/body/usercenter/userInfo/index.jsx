@@ -1,5 +1,5 @@
 import React from "react";
-import {Form, Input, Radio, DatePicker, Cascader, AutoComplete, Switch} from 'antd';
+import {Form, Input, Radio, DatePicker, Cascader, AutoComplete, Switch, Select, Slider, Button} from 'antd';
 import moment from 'moment';
 import {postApi} from "api";
 import {urls} from "urls";
@@ -23,6 +23,15 @@ const options = [{
     }],
   }]
 }];
+
+const marks = {
+    0: '0',
+    10: '10年',
+    20: '20年',
+    30: '30年',
+    40: '40年',
+    50: '50年'
+  };
 
 class UserInfo extends React.Component{
     constructor(props){
@@ -53,20 +62,29 @@ class UserInfo extends React.Component{
         this.setState({ result });
     }
 
+    //提交
+    handleSubmit = () => {
+        this.props.form.validateFieldsAndScroll((err, values) => {
+            if(!err) {
+                console.log(values);
+            }
+        });
+    }
+
     render(){
-        const { result } = this.state;
-        const children = result.map((email) => {
+        const {result} = this.state;
+        const children = result.map(email => {
             return <Option key={email}>{email}</Option>;
         });
 
         const formItemLayout = {
             labelCol: {
-                xs: { span: 4 },
-                sm: { span: 4 },
+                xs: {span: 4},
+                sm: {span: 4},
             },
             wrapperCol: {
-                xs: { span: 16 },
-                sm: { span: 16 },
+                xs: {span: 16},
+                sm: {span: 16},
             }
         };
 
@@ -75,6 +93,7 @@ class UserInfo extends React.Component{
                 <Form className="form">
                     <FormItem label='昵称' {...formItemLayout} >
                         {this.props.form.getFieldDecorator('name', {
+                            rules: [{ required: true, message: "不能为空！" }],
                             initialValue: ""
                         })(
                             <Input placeholder="请输入" />
@@ -123,6 +142,37 @@ class UserInfo extends React.Component{
                         )}
                     </FormItem>
 
+                    <FormItem label='职业' {...formItemLayout} >
+                        {this.props.form.getFieldDecorator('job', {
+                            initialValue: ""
+                        })(
+                            <Select>
+                                <Option value="计算机/互联网/通信">计算机/互联网/通信</Option>
+                                <Option value="生产/工艺/制造">生产/工艺/制造</Option>
+                                <Option value="医疗/护理/制药">医疗/护理/制药</Option>
+                                <Option value="金融/银行/投资/保险">金融/银行/投资/保险</Option>
+
+                                <Option value="商业/服务业/个体经营">商业/服务业/个体经营</Option>
+                                <Option value="文化/广告/传媒">文化/广告/传媒</Option>
+                                <Option value="娱乐/艺术/表演">娱乐/艺术/表演</Option>
+                                <Option value="律师/法务">律师/法务</Option>
+
+                                <Option value="教育/培训">教育/培训</Option>
+                                <Option value="公务员/行政/事业单位">公务员/行政/事业单位</Option>
+                                <Option value="学生">学生</Option>
+                                <Option value="其他">其他</Option>
+                            </Select>
+                        )}
+                    </FormItem>
+
+                    <FormItem label='工龄' {...formItemLayout} >
+                        {this.props.form.getFieldDecorator('workAge', {
+                            initialValue: 0
+                        })(
+                            <Slider marks={marks} max={50} />
+                        )}
+                    </FormItem>
+
                     <FormItem label='家乡' {...formItemLayout} >
                         {this.props.form.getFieldDecorator('Hometown', {
                             initialValue: []
@@ -152,6 +202,16 @@ class UserInfo extends React.Component{
                         })(
                             <TextArea rows={4} placeholder="请输入" />
                         )}
+                    </FormItem>
+
+                    <FormItem 
+                        wrapperCol={{
+                            xs: { span: 16, offset: 4 },
+                            sm: { span: 16, offset: 4 }
+                        }}
+                    >
+                        <Button type="primary" onClick={this.handleSubmit}>确定</Button>
+                        <Button className="ml10" onClick={() => {this.props.form.resetFields();}}>重置</Button>
                     </FormItem>
                 </Form>
             </div>
