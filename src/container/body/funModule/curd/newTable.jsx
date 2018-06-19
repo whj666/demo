@@ -142,7 +142,7 @@ class NewTable extends React.Component{
                 }
 
                 footer={
-                    <div className="fr di">
+                    <div className="fr">
                         <Button className="mr10" type="primary" onClick={this.handleOk.bind(this)}>保存</Button>
                     </div>
                 }

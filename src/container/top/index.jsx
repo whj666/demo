@@ -64,7 +64,7 @@ class Top extends React.Component{
                     <Dropdown overlay={menu} placement="bottomRight">
                         <a className="ant-dropdown-link fr mr20" href="javascript:void(0);">
                             <div className="top-rightBox cp">
-                                <img className="userImg fl di mr10 di" src="http://localhost:8080/resources/images/34560006.png" />
+                                <img className="userImg fl dib mr10" src="http://localhost:8080/resources/images/34560006.png" />
                                 <div className="fl userName f16">
                                     {localStorage.userName}
                                     <Icon type="down" />

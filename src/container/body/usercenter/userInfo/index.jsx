@@ -1,5 +1,5 @@
 import React from "react";
-import {Form, Input, Radio, DatePicker, Cascader, AutoComplete, Switch, Select, Slider, Button} from 'antd';
+import {Form, Input, Radio, DatePicker, Cascader, AutoComplete, Switch, Select, Slider, Button, Upload, Icon, Message} from 'antd';
 import moment from 'moment';
 import {postApi} from "api";
 import {urls} from "urls";
@@ -31,13 +31,32 @@ const marks = {
     30: '30年',
     40: '40年',
     50: '50年'
-  };
+};
+
+function getBase64(img, callback) {
+    const reader = new FileReader();
+    reader.addEventListener('load', () => callback(reader.result));
+    reader.readAsDataURL(img);
+}
+
+function beforeUpload(file) {
+    const isJPG = file.type === 'image/jpeg';
+    if (!isJPG) {
+      Message.error('You can only upload JPG file!');
+    }
+    const isLt2M = file.size / 1024 / 1024 < 2;
+    if (!isLt2M) {
+      Message.error('Image must smaller than 2MB!');
+    }
+    return isJPG && isLt2M;
+}
 
 class UserInfo extends React.Component{
     constructor(props){
         super(props);
 
         this.state = {
+            imageUrl:"",
             result: []
         }
     }
@@ -71,6 +90,21 @@ class UserInfo extends React.Component{
         });
     }
 
+    //图片上传
+    handleChange = info => {
+        if(info.file.status === 'uploading'){
+            return false;
+        };
+
+        if(info.file.status === 'done'){
+            getBase64(info.file.originFileObj, imageUrl => {
+                this.setState({
+                    imageUrl
+                })
+            });
+        }
+    }
+
     render(){
         const {result} = this.state;
         const children = result.map(email => {
@@ -89,8 +123,8 @@ class UserInfo extends React.Component{
         };
 
         return(
-            <div className="userInfo">
-                <Form className="form">
+            <div className="userInfo cb">
+                <Form className="form fl">
                     <FormItem label='昵称' {...formItemLayout} >
                         {this.props.form.getFieldDecorator('name', {
                             rules: [{ required: true, message: "不能为空！" }],
@@ -214,6 +248,20 @@ class UserInfo extends React.Component{
                         <Button className="ml10" onClick={() => {this.props.form.resetFields();}}>重置</Button>
                     </FormItem>
                 </Form>
+
+                <div className="photoBox tac fl">
+                    <img className="showImg mb10" src="http://localhost:8080/resources/images/34560006.png" />
+                    <br/>
+                    <Upload
+                        name="photo"
+                        showUploadList={false}
+                        action={urls.uploadUserPhoto}
+                        beforeUpload={beforeUpload}
+                        onChange={this.handleChange}
+                    >
+                        <Button className="dib mt10">更换头像</Button>
+                    </Upload>
+                </div>
             </div>
         );
     }
