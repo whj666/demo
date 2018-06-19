@@ -4,5 +4,7 @@ export const urls = {
     login: '/api/login',
     register: '/api/register',
     getTableData: '/api/getTableData',
-    saveTableEdit: '/api/saveTableEdit'
+    saveTableEdit: '/api/saveTableEdit',
+    deleteTableData: '/api/deleteTableData',
+    uploadUserPhoto: '/api/uploadUserPhoto'
 };

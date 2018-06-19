@@ -1,19 +1,43 @@
 import React from 'react';
 import './style.less';
-import {Icon, Breadcrumb} from 'antd';
+import {Icon, Breadcrumb, Dropdown, Menu} from 'antd';
+import navData from "../nav/menuList"
 
 //引入redux
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import * as actionAll from 'actionAll';
 
+const menu = (
+    <Menu>
+        <Menu.Item>
+            <a href="javascript:void(0);"><Icon type="user" /> 个人中心</a>
+        </Menu.Item>
+        <Menu.Item>
+            <a href="javascript:void(0);"><Icon type="setting" /> 修改密码</a>
+        </Menu.Item>
+        <Menu.Item>
+            <a href="#/login"><Icon type="logout" /> 注销</a>
+        </Menu.Item>
+    </Menu>
+);
+
 class Top extends React.Component{
     constructor(props){
-        super();
+        super(props);
 
         this.state = {
-            flag: Boolean(Number(localStorage.collapsed))
+            flag: Boolean(Number(localStorage.collapsed)),
+            titleName: navData.titleToName[props.hash[0]],
+            itemName: navData.itemToName[props.hash[1]]
         }
+    }
+
+    componentWillReceiveProps(nextProps){
+        this.setState({
+            titleName: navData.titleToName[nextProps.hash[0]],
+            itemName: navData.itemToName[nextProps.hash[1]]
+        })
     }
 
     //菜单收起展开
@@ -27,11 +51,6 @@ class Top extends React.Component{
         })
     }
 
-    //登出
-    signOut(){
-        location.hash = "#/login";
-    }
-
     render(){
         return(
         	<div className="topBox">
@@ -42,17 +61,23 @@ class Top extends React.Component{
 
                     <div className="fl f16 systemName">CMS SYSTEM</div>
 
-                    <div className="fr">
-                        <Icon onClick={this.signOut.bind(this)} type="logout" />
-                    </div>
-
-                    <div className="fr userName f16">{localStorage.userName}</div>
+                    <Dropdown overlay={menu} placement="bottomRight">
+                        <a className="ant-dropdown-link fr mr20" href="javascript:void(0);">
+                            <div className="top-rightBox cp">
+                                <img className="userImg fl dib mr10" src="http://localhost:8080/resources/images/34560006.png" />
+                                <div className="fl userName f16">
+                                    {localStorage.userName}
+                                    <Icon type="down" />
+                                </div>
+                            </div>
+                        </a>
+                    </Dropdown>
                 </div>
 
                 <div className="bread">
                     <Breadcrumb>
-                        <Breadcrumb.Item>水库调度</Breadcrumb.Item>
-                        <Breadcrumb.Item>方案制作</Breadcrumb.Item>
+                        <Breadcrumb.Item>{this.state.titleName}</Breadcrumb.Item>
+                        <Breadcrumb.Item>{this.state.itemName}</Breadcrumb.Item>
                     </Breadcrumb>
                 </div>
         	</div>

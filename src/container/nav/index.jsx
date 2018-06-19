@@ -23,7 +23,7 @@ class Nav extends React.Component{
         this.setState({
             openKeys: [nextProps.openKeys],
             selectedKeys: [nextProps.hash],
-            collapsed: nextProps.stateAll.common.collapsed
+            collapsed: nextProps.stateAll.common.collapsed != null ? nextProps.stateAll.common.collapsed : this.state.collapsed
         });
     }
 

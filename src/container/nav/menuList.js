@@ -1,31 +1,28 @@
 export default {
     "list": [{
-        "key": "table",
+        "key": "funModule",
         "icon": "logout",
-        "title": "表格控件",
+        "title": "功能模块",
         "children": [{
-            "key": "/table/curd",
+            "key": "/funModule/curd",
             "name": "增删查改"
         },{
-            "key": "/dispatch/administration",
+            "key": "/funModule/administration",
             "name": "方案管理"
         },{
-            "key": "/dispatch/contrast",
+            "key": "/funModule/contrast",
             "name": "方案对比"
         }]
     },{
-        "key": "prediction",
+        "key": "usercenter",
         "icon": "line-chart",
-        "title": "洪水预报",
+        "title": "用户中心",
         "children": [{
-            "key": "/prediction/programManagement",
-            "name": "模型方案管理"
+            "key": "/usercenter/userInfo",
+            "name": "个人信息"
         },{
-            "key": "/prediction/jobForecast",
-            "name": "实时作业预报"
-        },{
-            "key": "/prediction/resultManagement",
-            "name": "预报结果管理"
+            "key": "/usercenter/securitySet",
+            "name": "安全设置"
         }]
     },{
         "key": "settinglist",
@@ -41,5 +38,24 @@ export default {
             "key": "/settinglist/modelSetting",
             "name": "模型配置"
         }]
-    }]
+    }],
+
+    "titleToName": {
+        "funModule": "功能模块", 
+        "usercenter": "用户中心", 
+        "settinglist": "配置列表"
+    },
+
+    "itemToName": {
+        "curd": "增删查改",
+        "administration": "方案管理",
+        "contrast": "方案对比",
+
+        "userInfo": "个人信息",
+        "securitySet": "安全设置",
+
+        "objectSetting": "对象配置",
+        "moduleSetting": "模块配置",
+        "modelSetting": "模型配置"
+    }
 }

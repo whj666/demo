@@ -1,5 +1,5 @@
 import React from "react";
-import {Form, Button, Input, Popconfirm, Table, Divider} from 'antd';
+import {Form, Button, Input, Popconfirm, Table, Divider, Message} from 'antd';
 import QueueAnim from 'rc-queue-anim';
 import {getApi, postApi} from "api";
 import {urls} from "urls";
@@ -8,7 +8,7 @@ import RightModal from "rightModal";
 import NewTable from "./newTable";
 import {getViewPort} from 'public';
 
-class TableMoudel extends React.Component{
+class Curd extends React.Component{
     constructor(props){
         super(props);
 
@@ -32,10 +32,22 @@ class TableMoudel extends React.Component{
                 title: '年龄',
                 dataIndex: 'age',
                 width: '20%',
+                sorter: (a, b) => a.age - b.age
             },{
                 title: '人设',
                 dataIndex: 'type',
-                width: '20%'
+                width: '20%',
+                filters: [{
+                    text: '高富帅',
+                    value: '高富帅',
+                },{
+                    text: '白富美',
+                    value: '白富美',
+                },{
+                    text: '臭屌丝',
+                    value: '臭屌丝',
+                }],
+                onFilter: (value, record) => record.type.indexOf(value) === 0
             },,{
                 title: '邮箱',
                 dataIndex: 'email',
@@ -48,7 +60,7 @@ class TableMoudel extends React.Component{
                     <span>
                         <a href="javascript:void(0);" onClick={() => this.edit(record)}>编辑</a>
                         <Divider type="vertical" />
-                        <Popconfirm title="是否确定删除">
+                        <Popconfirm title="是否确定删除" onConfirm={() => this.delete(record)}>
                             <a href="javascript:void(0);">删除</a>
                         </Popconfirm>
                     </span>
@@ -59,19 +71,27 @@ class TableMoudel extends React.Component{
 
     componentDidMount(){
         window.addEventListener('resize', this.handleHeight.bind(this));
-        this.getTableData({userName:localStorage.userName});
+        this.ref.handleSubmit();
     }
 
     componentWillUnmount() {
         window.removeEventListener('resize', this.handleHeight.bind(this));
     }
 
+    //删除数据
+    delete = (record) => {
+        postApi({_id: record._id}, urls.deleteTableData, res => {
+            this.ref.handleSubmit();
+            Message.success(res.message);
+        })
+    }
+
     //查询数据
     getTableData(option){
         getApi(option, urls.getTableData, res => {
             let tableData = [];
-            if(res.data && res.data.userList){
-                let userList = res.data.userList;
+            if(res.data){
+                let userList = res.data;
                 for(let i in userList){
                     tableData.push({
                         key:i,
@@ -79,7 +99,7 @@ class TableMoudel extends React.Component{
                         age: userList[i].age,
                         type: userList[i].type,
                         email: userList[i].email,
-                        id: userList[i].id
+                        _id: userList[i]._id
                     });
                 };
             };
@@ -126,18 +146,18 @@ class TableMoudel extends React.Component{
 
     //编辑
     edit(record){
-        let {name, age, type, email, id} = record;
+        let {name, age, type, email, _id} = record;
         this.setState({
-            modal: Object.assign({}, {name, age, type, email, id})
+            modal: Object.assign({}, {name, age, type, email, _id})
         },() => {
-            this.visibleHandle(id);
+            this.visibleHandle(_id);
         })
     }
   
     render(){
         return(
             <div className="tableMoudel h100">
-                <SearchBar this={this} />
+                <SearchBar wrappedComponentRef={ref => {this.ref = ref}} getTableData={this.getTableData.bind(this)} this={this} />
 
                 <Table 
                     className="mt10"
@@ -162,7 +182,7 @@ class TableMoudel extends React.Component{
                         <NewTable 
                             key="NewTable"
                             rightModalHandle={this.visibleHandle.bind(this)}
-                            getTableData={this.getTableData.bind(this)}
+                            getTableData={this.ref.handleSubmit}
                             data={this.state.modal}
                         />
                     }
@@ -172,4 +192,4 @@ class TableMoudel extends React.Component{
     }
 }
 
-export default TableMoudel
+export default Curd

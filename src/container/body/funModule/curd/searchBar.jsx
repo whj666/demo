@@ -1,11 +1,10 @@
 import React from "react";
-import {Form, Button, Input, Select} from 'antd';
+import {Form, Button, Input, InputNumber} from 'antd';
 import {postApi} from "api";
 import {urls} from "urls";
 import "./style"
 
 const FormItem = Form.Item;
-const Option = Select.Option;
 
 class SearchBar extends React.Component{
     constructor(props){
@@ -21,12 +20,10 @@ class SearchBar extends React.Component{
     }
 
     //查询
-    handleSubmit(e){
-        e.preventDefault();
-
+    handleSubmit = () => {
         this.props.form.validateFieldsAndScroll((err, values) => {
-            if (!err) {
-                console.log(values);
+            if(!err) {
+                this.props.getTableData(Object.assign({}, {userName:localStorage.userName}, values));
             }
         });
     }
@@ -44,7 +41,7 @@ class SearchBar extends React.Component{
     render(){
         return(
             <div className="searchBar oh">
-                <Form className="fl" layout="inline" onSubmit={this.handleSubmit.bind(this)}>
+                <Form className="fl" layout="inline">
                     <FormItem label='姓名' >
                         {this.props.form.getFieldDecorator('name', {
                             initialValue: ""
@@ -53,25 +50,29 @@ class SearchBar extends React.Component{
                         )}
                     </FormItem>
 
-                    <FormItem label='人设' >
-                        {this.props.form.getFieldDecorator('type', {
-                            initialValue: []
+                    <FormItem label='最小年龄' >
+                        {this.props.form.getFieldDecorator('minAge', {
+                            initialValue: ""
                         })(
-                            <Select placeholder="请输入" style={{ width: 174 }}>
-                                <Option value="高富帅">高富帅</Option>
-                                <Option value="白富美">白富美</Option>
-                                <Option value="臭屌丝">臭屌丝</Option>
-                            </Select>
+                            <InputNumber placeholder="请输入" />
+                        )}
+                    </FormItem>
+
+                    <FormItem label='最大年龄' >
+                        {this.props.form.getFieldDecorator('maxAge', {
+                            initialValue: ""
+                        })(
+                            <InputNumber placeholder="请输入" />
                         )}
                     </FormItem>
 
                     <FormItem>
-                        <Button type="primary" htmlType="submit">查询</Button>
+                        <Button type="primary" icon="search" onClick={this.handleSubmit}>查询</Button>
                         <Button className="ml10" onClick={this.reset.bind(this)}>重置</Button>
                     </FormItem>
                 </Form>
 
-                <Button className="fr" type="primary" onClick={this.new.bind(this)}>新建</Button>
+                <Button icon="profile" className="fr" type="primary" onClick={this.new.bind(this)}>新建</Button>
             </div>
         );
     }
