@@ -56,7 +56,7 @@ class UserInfo extends React.Component{
         super(props);
 
         this.state = {
-            imageUrl:"",
+            imageUrl:null,
             result: []
         }
     }
@@ -141,7 +141,6 @@ class UserInfo extends React.Component{
                             <RadioGroup>
                                 <Radio value="男">男</Radio>
                                 <Radio value="女">女</Radio>
-                                <Radio value="保密">保密</Radio>
                             </RadioGroup>
                         )}
                     </FormItem>
@@ -178,9 +177,9 @@ class UserInfo extends React.Component{
 
                     <FormItem label='职业' {...formItemLayout} >
                         {this.props.form.getFieldDecorator('job', {
-                            initialValue: ""
+                            initialValue: []
                         })(
-                            <Select>
+                            <Select placeholder="请选择">
                                 <Option value="计算机/互联网/通信">计算机/互联网/通信</Option>
                                 <Option value="生产/工艺/制造">生产/工艺/制造</Option>
                                 <Option value="医疗/护理/制药">医疗/护理/制药</Option>
@@ -234,7 +233,7 @@ class UserInfo extends React.Component{
                         {this.props.form.getFieldDecorator('personalitySignature', {
                             initialValue: ""
                         })(
-                            <TextArea rows={4} placeholder="请输入" />
+                            <TextArea rows={3} placeholder="请输入" />
                         )}
                     </FormItem>
 
@@ -250,10 +249,10 @@ class UserInfo extends React.Component{
                 </Form>
 
                 <div className="photoBox tac fl">
-                    <img className="showImg mb10" src="http://localhost:8080/resources/images/34560006.png" />
+                    <img className="showImg mb10" src={!this.state.imageUrl ? "http://localhost:8080/resources/images/34560006.png" : this.state.imageUrl} />
                     <br/>
                     <Upload
-                        name="photo"
+                        name="file"
                         showUploadList={false}
                         action={urls.uploadUserPhoto}
                         beforeUpload={beforeUpload}
