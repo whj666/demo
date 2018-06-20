@@ -9,3 +9,10 @@ export function collapsed(data){
         data
     }
 }
+
+export function getUserPhoto(data){
+    return{
+        type: actionTypeAll.getUserPhoto,
+        data
+    }
+}

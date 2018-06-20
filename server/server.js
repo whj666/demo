@@ -1,9 +1,7 @@
 const serve = require('koa-static');
 const Koa = require('koa');
-const app = new Koa();
-const bodyParser = require('koa-bodyparser');
-const multer = require('koa-multer');
-const router = require('koa-router')();
+const koaBody = require('koa-body');
+const fs = require('fs');
 
 //login
 const findUser = require('./app/login/findUser.js');
@@ -15,24 +13,25 @@ const tableSaveUser = require('./app/table/saveUser.js');
 const tableFindUser = require('./app/table/findUser.js');
 const deleteUser = require('./app/table/deleteUser.js');
 
+//userPhoto
+const saveUserPhoto = require('./app/userInfo/photo/saveUserPhoto.js');
+const findUserPhoto = require('./app/userInfo/photo/findUserPhoto.js');
+
+const app = new Koa();
 app.use(serve('.'));
-
-//使用ctx.body解析中间件 (当POST请求的时候，中间件koa-bodyparser解析POST传递的数据，并显示出来)
-app.use(bodyParser());
-
-//图片上传
-const storage = multer.diskStorage({
-    destination: "resources/images",
-    filename(ctx,file,cb){
-        const filenameArr = file.originalname.split('.');
-        cb(null,Date.now() + '.' + filenameArr[filenameArr.length-1]);
+app.use(koaBody({
+    multipart: true,
+    formidable: {
+        keepExtensions: true,                                                                          
+        uploadDir: "resources/images",                                                                
+        onFileBegin: (fileName, file) => {                                                         
+            const type = file.path.substring(file.path.indexOf("."), file.path.length);
+            file.path = "resources/images/" + fileName + "_" + (new Date()).valueOf() + type;
+        }
     }
-});
-const upload = multer({storage});
-app.use(router.post('/api/uploadUserPhoto', upload.single('file'), async (ctx, next) => {  
-    ctx.body = ctx.req.file.filename;
-}).routes());
+}));
 
+//事件集
 app.use(async (ctx) => {
     if(ctx.url.substring(0, ctx.url.indexOf("?")) === '/api/get' && ctx.method === 'GET'){
         let request = ctx.request;
@@ -91,6 +90,25 @@ app.use(async (ctx) => {
         }else{
             ctx.body = {flag: false, message: "删除失败！"};
         };
+    }else if(ctx.url === '/api/uploadUserPhoto' && ctx.method === 'POST'){
+        //用户头像上传
+        let userName = null;
+        for(let key in ctx.request.files){
+            userName = key;
+        };
+
+        const path = ctx.request.files[userName].path;
+        const photoName = path.substring(path.lastIndexOf("/") + 1, path.length);
+
+        const res = await saveUserPhoto(photoName, userName);
+        if(res){
+            ctx.body = {flag: true, data: photoName};
+        };
+    }else if(ctx.url === '/api/getUserPhoto' && ctx.method === 'POST'){
+        //获取用户头像
+        let postData = ctx.request.body;
+        let res = await findUserPhoto(postData);
+        ctx.body = {flag: true, data: res && res.photoName};
     }
 })
 

@@ -6,5 +6,6 @@ export const urls = {
     getTableData: '/api/getTableData',
     saveTableEdit: '/api/saveTableEdit',
     deleteTableData: '/api/deleteTableData',
-    uploadUserPhoto: '/api/uploadUserPhoto'
+    uploadUserPhoto: '/api/uploadUserPhoto',
+    getUserPhoto: '/api/getUserPhoto'
 };

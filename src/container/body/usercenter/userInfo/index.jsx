@@ -5,12 +5,18 @@ import {postApi} from "api";
 import {urls} from "urls";
 import "./style.less";
 
+//引入redux
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
+import * as actionAll from 'actionAll';
+
 const {TextArea} = Input;
 const FormItem = Form.Item;
 const RadioGroup = Radio.Group;
 const RadioButton = Radio.Button;
 const Option = AutoComplete.Option;
 
+//省市区数据
 const options = [{
   value: 'jiangsu',
   label: 'Jiangsu',
@@ -24,6 +30,7 @@ const options = [{
   }]
 }];
 
+//滑动选择栏数据
 const marks = {
     0: '0',
     10: '10年',
@@ -33,20 +40,22 @@ const marks = {
     50: '50年'
 };
 
+//把图片转化为base64
 function getBase64(img, callback) {
     const reader = new FileReader();
     reader.addEventListener('load', () => callback(reader.result));
     reader.readAsDataURL(img);
 }
 
+//上传图片前的校验
 function beforeUpload(file) {
-    const isJPG = file.type === 'image/jpeg';
+    const isJPG = (file.type === 'image/jpeg' || file.type === 'image/png');
     if (!isJPG) {
-      Message.error('You can only upload JPG file!');
+      Message.error('只能上传格式为jpg或者png的图片！');
     }
     const isLt2M = file.size / 1024 / 1024 < 2;
     if (!isLt2M) {
-      Message.error('Image must smaller than 2MB!');
+      Message.error('图片大小不能超过2M！');
     }
     return isJPG && isLt2M;
 }
@@ -57,12 +66,23 @@ class UserInfo extends React.Component{
 
         this.state = {
             imageUrl:null,
+            userPhotoReady: false,
             result: []
         }
     }
 
     componentDidMount(){
-        
+        postApi({userName: localStorage.userName}, urls.getUserPhoto, res => {
+            if(res.data){
+                this.setState({
+                    imageUrl: "http://localhost:8080/resources/images/" + res.data
+                })
+            };
+
+            this.setState({
+                userPhotoReady: true
+            })
+        })
     }
 
     //生日不可选择的日期
@@ -100,6 +120,8 @@ class UserInfo extends React.Component{
             getBase64(info.file.originFileObj, imageUrl => {
                 this.setState({
                     imageUrl
+                },() => {
+                    this.props.stateAll.common.getUserPhoto();
                 })
             });
         }
@@ -249,10 +271,14 @@ class UserInfo extends React.Component{
                 </Form>
 
                 <div className="photoBox tac fl">
-                    <img className="showImg mb10" src={!this.state.imageUrl ? "http://localhost:8080/resources/images/34560006.png" : this.state.imageUrl} />
+                    {this.state.userPhotoReady ? 
+                        <img className="showImg mb10" src={!this.state.imageUrl ? "http://localhost:8080/resources/images/34560006.png" : this.state.imageUrl} />
+                        :
+                        <div className="showImg mb10 imgOccupy"></div>
+                    }
                     <br/>
                     <Upload
-                        name="file"
+                        name={localStorage.userName}
                         showUploadList={false}
                         action={urls.uploadUserPhoto}
                         beforeUpload={beforeUpload}
@@ -266,4 +292,19 @@ class UserInfo extends React.Component{
     }
 }
 
-export default Form.create()(UserInfo)
+function mapStateToProps(state){
+    return {
+        stateAll: state
+    };
+}
+
+function mapDispatchToProps(dispatch){
+    return {
+        actionAll: bindActionCreators(actionAll, dispatch),
+    };
+}
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Form.create()(UserInfo))

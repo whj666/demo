@@ -2,6 +2,8 @@ import React from 'react';
 import './style.less';
 import {Icon, Breadcrumb, Dropdown, Menu} from 'antd';
 import navData from "../nav/menuList"
+import {postApi} from "api";
+import {urls} from "urls";
 
 //引入redux
 import {bindActionCreators} from 'redux';
@@ -27,16 +29,41 @@ class Top extends React.Component{
         super(props);
 
         this.state = {
+            imageUrl:null,
+            userPhotoReady: false,
             flag: Boolean(Number(localStorage.collapsed)),
             titleName: navData.titleToName[props.hash[0]],
             itemName: navData.itemToName[props.hash[1]]
         }
+
+        props.actionAll.getUserPhoto({
+            getUserPhoto: this.getUserPhoto
+        });
+    }
+
+    componentDidMount(){
+        this.getUserPhoto();
     }
 
     componentWillReceiveProps(nextProps){
         this.setState({
             titleName: navData.titleToName[nextProps.hash[0]],
             itemName: navData.itemToName[nextProps.hash[1]]
+        })
+    }
+
+    //获取用户头像
+    getUserPhoto = () => {
+        postApi({userName: localStorage.userName}, urls.getUserPhoto, res => {
+            if(res.data){
+                this.setState({
+                    imageUrl: "http://localhost:8080/resources/images/" + res.data
+                })
+            };
+
+            this.setState({
+                userPhotoReady: true
+            })
         })
     }
 
@@ -64,7 +91,11 @@ class Top extends React.Component{
                     <Dropdown overlay={menu} placement="bottomRight">
                         <a className="ant-dropdown-link fr mr20" href="javascript:void(0);">
                             <div className="top-rightBox cp">
-                                <img className="userImg fl dib mr10" src="http://localhost:8080/resources/images/34560006.png" />
+                                {this.state.userPhotoReady ? 
+                                    <img className="userImg fl dib mr10" src={!this.state.imageUrl ? "http://localhost:8080/resources/images/34560006.png" : this.state.imageUrl} />
+                                    :
+                                    <div className="userImg fl dib mr10 imgOccupy"></div>
+                                }
                                 <div className="fl userName f16">
                                     {localStorage.userName}
                                     <Icon type="down" />
