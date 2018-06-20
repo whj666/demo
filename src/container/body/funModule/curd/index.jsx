@@ -75,6 +75,7 @@ class Curd extends React.Component{
     }
 
     componentWillUnmount() {
+        this.flag = true;
         window.removeEventListener('resize', this.handleHeight.bind(this));
     }
 
@@ -112,9 +113,11 @@ class Curd extends React.Component{
 
     //获取浏览器高度
     handleHeight(){
-        this.setState({ 
-            height: getViewPort().height 
-        });
+        if(!this.flag){
+            this.setState({ 
+                height: getViewPort().height 
+            });
+        }
     }
 
     //控制弹框是否显示
