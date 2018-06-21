@@ -13,10 +13,10 @@ import * as actionAll from 'actionAll';
 const menu = (
     <Menu>
         <Menu.Item>
-            <a href="#/usercenter/userInfo"><Icon type="user" /> 个人中心</a>
+            <a href="#/usercenter/userInfo"><Icon type="user" /> 个人信息</a>
         </Menu.Item>
         <Menu.Item>
-            <a href="javascript:void(0);"><Icon type="setting" /> 修改密码</a>
+            <a href="javascript:void(0);"><Icon type="setting" /> 安全设置</a>
         </Menu.Item>
         <Menu.Item>
             <a href="#/login"><Icon type="logout" /> 注销</a>

@@ -81,18 +81,20 @@ class UserInfo extends React.Component{
     //获取用户信息
     getUserInfo = () => {
         postApi({userName: localStorage.userName}, urls.getUserInfo, res => {
-            this.props.form.setFieldsValue({
-                name: res.data.name,
-                sex: res.data.sex,
-                birthday: res.data.birthday === "" ? null : moment(getTimeValue(Number(res.data.birthday), "yyyy-mm-dd"), 'YYYY/MM/DD'),
-                showAge: res.data.showAge,
-                marriage: res.data.marriage,
-                job: res.data.job === "" ? [] : res.data.job,
-                workAge: res.data.workAge,
-                Hometown: res.data.Hometown,
-                email: res.data.email,
-                personalitySignature: res.data.personalitySignature
-            });
+            if(res.data){
+                this.props.form.setFieldsValue({
+                    name: res.data.name,
+                    sex: res.data.sex,
+                    birthday: res.data.birthday === "" ? null : moment(getTimeValue(Number(res.data.birthday), "yyyy-mm-dd"), 'YYYY/MM/DD'),
+                    showAge: res.data.showAge,
+                    marriage: res.data.marriage,
+                    job: res.data.job === "" ? [] : res.data.job,
+                    workAge: res.data.workAge,
+                    Hometown: res.data.Hometown,
+                    email: res.data.email,
+                    personalitySignature: res.data.personalitySignature
+                });
+            };
         })
     }
 
