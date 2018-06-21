@@ -17,6 +17,10 @@ const deleteUser = require('./app/table/deleteUser.js');
 const saveUserPhoto = require('./app/userInfo/photo/saveUserPhoto.js');
 const findUserPhoto = require('./app/userInfo/photo/findUserPhoto.js');
 
+//userData
+const saveUserData = require('./app/userInfo/userData/saveUserData.js');
+const getUserData = require('./app/userInfo/userData/getUserData.js');
+
 const app = new Koa();
 app.use(serve('.'));
 app.use(koaBody({
@@ -109,6 +113,18 @@ app.use(async (ctx) => {
         let postData = ctx.request.body;
         let res = await findUserPhoto(postData);
         ctx.body = {flag: true, data: res && res.photoName};
+    }else if(ctx.url === '/api/setUserInfo' && ctx.method === 'POST'){
+        //保存用户个人信息
+        let postData = ctx.request.body;
+        const res = await saveUserData(postData);
+        if(res){
+            ctx.body = {flag: true, message: "保存成功！"};
+        };
+    }else if(ctx.url === '/api/getUserInfo' && ctx.method === 'POST'){
+        //获取用户个人信息
+        let postData = ctx.request.body;
+        const res = await getUserData(postData);
+        ctx.body = {flag: true, data: res};
     }
 })
 

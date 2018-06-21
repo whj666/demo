@@ -5,6 +5,7 @@ import {postApi} from "api";
 import {urls} from "urls";
 import "./style.less";
 import cascaderAddressOptions from "cascaderAddressOptions";
+import {getTimeValue} from "public";
 
 //引入redux
 import {bindActionCreators} from 'redux';
@@ -73,13 +74,37 @@ class UserInfo extends React.Component{
     }
 
     componentDidMount(){
+        this.getUserPhoto();
+        this.getUserInfo();
+    }
+
+    //获取用户信息
+    getUserInfo = () => {
+        postApi({userName: localStorage.userName}, urls.getUserInfo, res => {
+            this.props.form.setFieldsValue({
+                name: res.data.name,
+                sex: res.data.sex,
+                birthday: res.data.birthday === "" ? null : moment(getTimeValue(Number(res.data.birthday), "yyyy-mm-dd"), 'YYYY/MM/DD'),
+                showAge: res.data.showAge,
+                marriage: res.data.marriage,
+                job: res.data.job === "" ? [] : res.data.job,
+                workAge: res.data.workAge,
+                Hometown: res.data.Hometown,
+                email: res.data.email,
+                personalitySignature: res.data.personalitySignature
+            });
+        })
+    }
+
+    //获取用户头像
+    getUserPhoto = () => {
         postApi({userName: localStorage.userName}, urls.getUserPhoto, res => {
             if(res.data){
                 this.setState({
                     imageUrl: "http://localhost:8080/resources/images/" + res.data
                 })
             };
-
+    
             this.setState({
                 userPhotoReady: true
             })
@@ -105,9 +130,13 @@ class UserInfo extends React.Component{
     //提交
     handleSubmit = () => {
         this.props.form.validateFieldsAndScroll((err, values) => {
-            if(!err) {
-                console.log(values);
-            }
+            if(!values.birthday){values.birthday = ""}else{values.birthday=values.birthday.valueOf().toString()};
+            values.job = values.job.toString();
+            if(!err){
+                postApi({userName: localStorage.userName, ...values}, urls.setUserInfo, res => {
+                    Message.success(res.message);
+                })
+            };
         });
     }
 

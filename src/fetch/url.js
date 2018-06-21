@@ -7,5 +7,7 @@ export const urls = {
     saveTableEdit: '/api/saveTableEdit',
     deleteTableData: '/api/deleteTableData',
     uploadUserPhoto: '/api/uploadUserPhoto',
-    getUserPhoto: '/api/getUserPhoto'
+    getUserPhoto: '/api/getUserPhoto',
+    setUserInfo: '/api/setUserInfo',
+    getUserInfo: '/api/getUserInfo'
 };
