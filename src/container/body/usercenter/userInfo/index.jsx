@@ -4,6 +4,7 @@ import moment from 'moment';
 import {postApi} from "api";
 import {urls} from "urls";
 import "./style.less";
+import cascaderAddressOptions from "cascaderAddressOptions";
 
 //引入redux
 import {bindActionCreators} from 'redux';
@@ -232,7 +233,7 @@ class UserInfo extends React.Component{
                         {this.props.form.getFieldDecorator('Hometown', {
                             initialValue: []
                         })(
-                            <Cascader options={options} placeholder="请选择" />
+                            <Cascader options={cascaderAddressOptions} placeholder="请选择" />
                         )}
                     </FormItem>
 

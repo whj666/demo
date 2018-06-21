@@ -17,7 +17,8 @@ module.exports = {
 			urls: path.resolve(__dirname, 'src/fetch/url'),
 			public: path.resolve(__dirname, 'src/public/public.js'),
 			actionAll: path.resolve(__dirname, 'src/container/actions/actionAll'),
-			rightModal: path.resolve(__dirname, 'src/components/rightModal')
+			rightModal: path.resolve(__dirname, 'src/components/rightModal'),
+			cascaderAddressOptions: path.resolve(__dirname, 'src/container/static/cascader-address-options.js')
 		}
 	},
 
