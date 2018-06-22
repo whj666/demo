@@ -2,15 +2,23 @@ import React from "react";
 import { Route, HashRouter, Switch, Redirect } from "react-router-dom";
 import "../public/public.less";
 import Login from "../container/login";
-import app from "../container";
+import App from "../container";
 
 class RouterMap extends React.Component {
+
+  //权限验证
+  check = () => {
+    return sessionStorage.login ? <App /> : <Redirect to={{
+      pathname: '/login'
+    }}/>
+  }
+
   render() {
     return (
       <HashRouter>
 	      <Switch>
-	      	<Route path="/login" component={Login} />
-	        <Route path="/" component={app} />
+	      	<Route  path="/login" component={Login} />
+	        <Route path="/" render={this.check} />
 	      </Switch>
       </HashRouter>
     )

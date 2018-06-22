@@ -17,6 +17,7 @@ class LoginIndex extends React.Component{
 
                 postApi(options, urls.login, res => {
                     localStorage.userName = values.userName;
+                    sessionStorage.login = true;
                     this.props.history.push("/funModule/curd");
                 })
             };
