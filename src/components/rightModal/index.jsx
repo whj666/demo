@@ -1,6 +1,7 @@
 import React from 'react';
 import {createPortal} from 'react-dom';
 import {Icon} from 'antd';
+import "./style.less"
 
 class RightModal extends React.Component {
     constructor(props) {
