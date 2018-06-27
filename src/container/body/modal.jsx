@@ -27,7 +27,7 @@ const CollectionCreateForm = Form.create()(
             return(
                 <ModalMoudle 
                     width="w40"
-                    height="mh70"
+                    height="h70"
                     visible={visible} 
                     title="表单" 
                     onCancel={onCancel} 
