@@ -15,7 +15,7 @@ class ModalMoudle extends React.Component{
     }
 
     componentDidMount(){
-        window.addEventListener('mouseup', this.checkRandom)
+        window.addEventListener('mouseup', this.checkRandom);
     }
 
     componentWillUnmount(){
@@ -82,7 +82,7 @@ class ModalMoudle extends React.Component{
     }
 
     render(){
-        const {visible, title, onCancel, onCreate, content, width, height} = this.props;
+        const {visible, title, onCancel, onOk, content, width, height} = this.props;
         
         return(
             <Modal 
@@ -90,7 +90,8 @@ class ModalMoudle extends React.Component{
                 visible={visible} 
                 title={title} 
                 onCancel={onCancel} 
-                onOk={onCreate}
+                onOk={onOk}
+                destroyOnClose={true}
             >
                 <div 
                     className="move w100 pa" 

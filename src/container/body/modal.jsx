@@ -16,7 +16,7 @@ const CollectionCreateForm = Form.create()(
         }
 
         render(){
-            const {visible, onCancel, onCreate, form, dataObj} = this.props;
+            const {visible, onCancel, onOk, form, dataObj} = this.props;
             const {getFieldDecorator} = form;
             let {name, code, sex, hobby, skill} = dataObj;
             const formItemLayout = {
@@ -31,7 +31,7 @@ const CollectionCreateForm = Form.create()(
                     visible={visible} 
                     title="表单" 
                     onCancel={onCancel} 
-                    onOk={onCreate} 
+                    onOk={onOk} 
                     content={
                         <Form layout="horizontal">
                             <Form.Item label="姓名" {...formItemLayout}>

@@ -47,7 +47,7 @@ class Demo extends React.Component{
     }
 
     //对话框-提交
-    handleCreate(){
+    handleCreate = () => {
         const form = this.formRef.props.form;
         form.validateFields((err, options) => {
             if(!err){
@@ -99,7 +99,7 @@ class Demo extends React.Component{
                     dataObj={this.state.dataObj}
                     visible={this.state.visible}
                     onCancel={this.handleCancel.bind(this)}
-                    onCreate={this.handleCreate.bind(this)}
+                    onOk={this.handleCreate}
                 />
 
                 <Father />
