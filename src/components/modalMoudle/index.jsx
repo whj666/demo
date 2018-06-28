@@ -77,8 +77,8 @@ class ModalMoudle extends React.Component{
         nl = nl > window.innerWidth - 100 ? window.innerWidth - 100 : nl;
         nt = nt > window.innerHeight - 49 ? window.innerHeight - 49 : nt;
 
-        this.node.css({left: nl + 'px'});
-        this.node.css({top: nt + 'px'});
+        this.node.css({left: 100*nl/window.innerWidth + "%"});
+        this.node.css({top: 100*nt/window.innerHeight + "%"});
     }
 
     render(){
