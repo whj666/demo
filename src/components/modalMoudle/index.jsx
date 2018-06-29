@@ -92,6 +92,7 @@ class ModalMoudle extends React.Component{
                 onCancel={onCancel} 
                 onOk={onOk}
                 destroyOnClose={true}
+                mask={false}
             >
                 <div 
                     className="move w100 pa" 
