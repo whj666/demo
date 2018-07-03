@@ -13,6 +13,10 @@ class Father extends React.Component{
   action(){
   	//调用子级的方法
     this.ref.change();
+    // let _this = this.ref;
+    // _this.setState({
+    //   child: "假儿子"
+    // })
   }
   
   change(){
