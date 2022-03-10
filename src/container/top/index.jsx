@@ -86,7 +86,7 @@ class Top extends React.Component{
                         <Icon onClick={this.collapsed.bind(this)} type={this.state.flag ? "menu-unfold" : "menu-fold"} />
                     </div>
 
-                    <div className="fl f16 systemName">CMS SYSTEM</div>
+                    <div className="fl f16 systemName">个性化个人简历系统</div>
 
                     <Dropdown overlay={menu} placement="bottomRight">
                         <a className="ant-dropdown-link fr mr20" href="javascript:void(0);">
