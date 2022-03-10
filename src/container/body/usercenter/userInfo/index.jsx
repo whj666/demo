@@ -35,11 +35,11 @@ const options = [{
 //滑动选择栏数据
 const marks = {
     0: '0',
-    10: '10年',
-    20: '20年',
-    30: '30年',
-    40: '40年',
-    50: '50年'
+    10: '10',
+    20: '20',
+    30: '30',
+    40: '40',
+    50: '50'
 };
 
 //把图片转化为base64
@@ -252,7 +252,7 @@ class UserInfo extends React.Component{
                         )}
                     </FormItem>
 
-                    <FormItem label='工龄' {...formItemLayout} >
+                    <FormItem label='工龄（年）' {...formItemLayout} >
                         {this.props.form.getFieldDecorator('workAge', {
                             initialValue: 0
                         })(
