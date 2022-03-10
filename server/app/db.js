@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const DB_URL = 'mongodb://whj:666@localhost:27017/mydb?authSource=admin';
+const DB_URL = 'mongodb://localhost';
 
 /**
  * 连接
