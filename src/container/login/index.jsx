@@ -38,7 +38,7 @@ class Login extends React.Component{
                             </TabPane>
                         </Tabs>
 
-                        <p className="copyright">Copyright <i className="anticon anticon-copyright"></i> 2018 JIN</p>
+                        <p className="copyright">Copyright <i className="anticon anticon-copyright"></i> 2022 JIN</p>
                     </div>
                 </div>
             </div>
