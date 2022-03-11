@@ -13,14 +13,29 @@ class personality extends Component {
               <img src={portrait1} />
             </div>
             <div className="cen_text">
-              <h2 style={{ color: "white" }}>
-                世上只有想不通的人，没有走不通的路。
+              <h2 style={{ color: "white", height: "unset" }}>
+                желание ржавчина семнадцать рассвет печь девять доброта домой
               </h2>
+              <h4
+                style={{
+                  color: "white",
+                  fontWeight: "normal",
+                  height: "unset",
+                }}
+              >
+                「 渴望 生锈 十七 黎明 火炉 九 善良 回家 一 货车 」
+              </h4>
               <hr />
-              <h3 style={{ color: "white" }}>某某</h3>
-              <h3 style={{ color: "white" }}>Web前端工程师</h3>
-              <h3 style={{ color: "white" }}>求职上海 / 苏州</h3>
-              <h3 style={{ color: "white" }}>130******</h3>
+              <h3 style={{ color: "white", height: "unset" }}>Bucky Barnes</h3>
+              <h3 style={{ color: "white", height: "unset", marginTop: 10 }}>
+                超级英雄 Winter Soldier 冬日战士
+              </h3>
+              <h3 style={{ color: "white", height: "unset", marginTop: 10 }}>
+                美国-印第安纳州-谢尔比维尔
+              </h3>
+              <h3 style={{ color: "white", height: "unset", marginTop: 10 }}>
+                1917年
+              </h3>
             </div>
           </div>
           <div className="down_arrow">

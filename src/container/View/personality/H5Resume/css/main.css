@@ -677,7 +677,7 @@ nav .nav_wrap {
   overflow: hidden;
 }
 .portrait {
-  height: 32%;
+  height: 40%;
   margin: 0 auto 8%;
   padding: 6px;
   text-align: center;
@@ -686,6 +686,7 @@ nav .nav_wrap {
   height: 100%;
   vertical-align: middle;
   border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.8);
 }
 .cen_text {
   height: 60%;
