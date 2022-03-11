@@ -14,7 +14,7 @@ class personality extends Component {
             </div>
             <div className="cen_text">
               <h2 style={{ color: "white", height: "unset" }}>
-                желание ржавчина семнадцать рассвет печь девять доброта домой
+                夜深了，倦了，睡了，安安静静，做着甜蜜的梦，一座城市再喧闹，没你，便是空城
               </h2>
               <h4
                 style={{
@@ -23,7 +23,7 @@ class personality extends Component {
                   height: "unset",
                 }}
               >
-                「 渴望 生锈 十七 黎明 火炉 九 善良 回家 一 货车 」
+                「 1010349053@nuanwa.net 」
               </h4>
               <hr />
               <h2
@@ -33,10 +33,10 @@ class personality extends Component {
                   fontWeight: "normal",
                 }}
               >
-                Bucky Barnes
+                枫林沐雨
               </h2>
               <h2 style={{ color: "white", height: "unset", marginTop: 10 }}>
-                超级英雄 Winter Soldier 冬日战士
+                Web前端开发工程师
               </h2>
               <h3
                 style={{
@@ -46,7 +46,7 @@ class personality extends Component {
                   fontWeight: "normal",
                 }}
               >
-                美国-印第安纳州-谢尔比维尔
+                江苏省 · 宿迁市
               </h3>
               <h3
                 style={{
@@ -56,7 +56,7 @@ class personality extends Component {
                   fontWeight: "normal",
                 }}
               >
-                1917年
+                1991
               </h3>
             </div>
           </div>
