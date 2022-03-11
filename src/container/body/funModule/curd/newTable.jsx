@@ -114,8 +114,8 @@ class NewTable extends React.Component {
                       .indexOf(input.toLowerCase()) >= 0
                   }
                 >
-                  <Option value="个性化">个性化</Option>
-                  <Option value="正式">正式</Option>
+                  <Option value="1">个性化</Option>
+                  <Option value="2">正式</Option>
                 </Select>
               )}
             </FormItem>

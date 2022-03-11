@@ -36,14 +36,15 @@ class Curd extends React.Component {
           filters: [
             {
               text: "个性化",
-              value: "个性化",
+              value: "1",
             },
             {
               text: "正式",
-              value: "正式",
+              value: "2",
             },
           ],
           onFilter: (value, record) => record.type.indexOf(value) === 0,
+          render: (text) => (text === "1" ? "个性化" : "正式"),
         },
         {
           title: "创建时间",
