@@ -40,7 +40,7 @@ class SearchBar extends React.Component {
     return (
       <div className="searchBar oh">
         <Form className="fl" layout="inline">
-          <FormItem label="姓名">
+          <FormItem label="简历名称">
             {this.props.form.getFieldDecorator("name", {
               initialValue: "",
             })(<Input placeholder="请输入" />)}
