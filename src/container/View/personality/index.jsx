@@ -26,11 +26,26 @@ class personality extends Component {
                 「 渴望 生锈 十七 黎明 火炉 九 善良 回家 一 货车 」
               </h4>
               <hr />
-              <h3 style={{ color: "white", height: "unset" }}>Bucky Barnes</h3>
+              <h2
+                style={{
+                  color: "white",
+                  height: "unset",
+                  fontWeight: "normal",
+                }}
+              >
+                Bucky Barnes
+              </h2>
               <h2 style={{ color: "white", height: "unset", marginTop: 10 }}>
                 超级英雄 Winter Soldier 冬日战士
               </h2>
-              <h3 style={{ color: "white", height: "unset", marginTop: 10, fontWeight: "normal" }}>
+              <h3
+                style={{
+                  color: "white",
+                  height: "unset",
+                  marginTop: 10,
+                  fontWeight: "normal",
+                }}
+              >
                 美国-印第安纳州-谢尔比维尔
               </h3>
               <h3
