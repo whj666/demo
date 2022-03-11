@@ -7,10 +7,12 @@ import {
   InputNumber,
   Message,
   AutoComplete,
+  DatePicker,
 } from "antd";
 import RightModal from "rightModal";
 import { urls } from "urls";
 import { postApi } from "api";
+import moment from "moment";
 
 const FormItem = Form.Item;
 const Option = Select.Option;
@@ -37,11 +39,18 @@ class NewTable extends React.Component {
           values._id = this.state.data._id;
         }
 
-        postApi(values, urls.saveTableEdit, (res) => {
-          this.props.getTableData();
-          this.props.rightModalHandle();
-          Message.success(res.message);
-        });
+        postApi(
+          {
+            ...values,
+            email: moment(values.email).format("YYYY-MM-DD HH:mm:ss"),
+          },
+          urls.saveTableEdit,
+          (res) => {
+            this.props.getTableData();
+            this.props.rightModalHandle();
+            Message.success(res.message);
+          }
+        );
       }
     });
   }
@@ -113,16 +122,16 @@ class NewTable extends React.Component {
 
             <FormItem {...formItemLayout} label="创建时间">
               {this.props.form.getFieldDecorator("email", {
-                initialValue: this.state.data.email || "",
+                initialValue:
+                  (this.state.data.email && moment(this.state.data.email)) ||
+                  undefined,
                 rules: [{ required: true, message: "不能为空！" }],
               })(
-                <AutoComplete
-                  className="w100"
-                  onSearch={this.handleSearch.bind(this)}
-                  placeholder="请输入"
-                >
-                  {children}
-                </AutoComplete>
+                <DatePicker
+                  showTime
+                  format="YYYY-MM-DD HH:mm:ss"
+                  placeholder="Select Time"
+                />
               )}
             </FormItem>
           </Form>
