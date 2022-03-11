@@ -27,13 +27,20 @@ class personality extends Component {
               </h4>
               <hr />
               <h3 style={{ color: "white", height: "unset" }}>Bucky Barnes</h3>
-              <h3 style={{ color: "white", height: "unset", marginTop: 10 }}>
+              <h2 style={{ color: "white", height: "unset", marginTop: 10 }}>
                 超级英雄 Winter Soldier 冬日战士
-              </h3>
-              <h3 style={{ color: "white", height: "unset", marginTop: 10 }}>
+              </h2>
+              <h3 style={{ color: "white", height: "unset", marginTop: 10, fontWeight: "normal" }}>
                 美国-印第安纳州-谢尔比维尔
               </h3>
-              <h3 style={{ color: "white", height: "unset", marginTop: 10 }}>
+              <h3
+                style={{
+                  color: "white",
+                  height: "unset",
+                  marginTop: 10,
+                  fontWeight: "normal",
+                }}
+              >
                 1917年
               </h3>
             </div>
