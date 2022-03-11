@@ -46,7 +46,7 @@ class Curd extends React.Component {
           onFilter: (value, record) => record.type.indexOf(value) === 0,
         },
         {
-          title: "邮箱",
+          title: "创建时间",
           dataIndex: "email",
           width: "20%",
         },

@@ -111,7 +111,7 @@ class NewTable extends React.Component {
               )}
             </FormItem>
 
-            <FormItem {...formItemLayout} label="邮箱">
+            <FormItem {...formItemLayout} label="创建时间">
               {this.props.form.getFieldDecorator("email", {
                 initialValue: this.state.data.email || "",
                 rules: [{ required: true, message: "不能为空！" }],
