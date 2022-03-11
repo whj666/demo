@@ -90,14 +90,6 @@ class NewTable extends React.Component {
               })(<Input placeholder="请输入" />)}
             </FormItem>
 
-            <FormItem {...formItemLayout} label="年龄">
-              {this.props.form.getFieldDecorator("age", {
-                initialValue:
-                  this.state.data.age == null ? "" : this.state.data.age,
-                rules: [{ required: true, message: "不能为空！" }],
-              })(<InputNumber className="w100" placeholder="请输入" />)}
-            </FormItem>
-
             <FormItem {...formItemLayout} label="简历类型">
               {this.props.form.getFieldDecorator("type", {
                 initialValue: this.state.data.type || [],

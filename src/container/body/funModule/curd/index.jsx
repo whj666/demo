@@ -20,7 +20,6 @@ class Curd extends React.Component {
       pageSize: 20,
       modal: {
         name: null,
-        age: null,
         type: null,
         email: null,
       },
@@ -29,12 +28,6 @@ class Curd extends React.Component {
           title: "简历名称",
           dataIndex: "name",
           width: "20%",
-        },
-        {
-          title: "年龄",
-          dataIndex: "age",
-          width: "20%",
-          sorter: (a, b) => a.age - b.age,
         },
         {
           title: "简历类型",
@@ -52,7 +45,6 @@ class Curd extends React.Component {
           ],
           onFilter: (value, record) => record.type.indexOf(value) === 0,
         },
-        ,
         {
           title: "邮箱",
           dataIndex: "email",
@@ -108,7 +100,6 @@ class Curd extends React.Component {
           tableData.push({
             key: i,
             name: userList[i].name,
-            age: userList[i].age,
             type: userList[i].type,
             email: userList[i].email,
             _id: userList[i]._id,
@@ -133,10 +124,7 @@ class Curd extends React.Component {
   visibleHandle(id) {
     if (!id) {
       this.setState({
-        modal: Object.assign(
-          {},
-          { name: null, age: null, type: null, email: null }
-        ),
+        modal: Object.assign({}, { name: null, type: null, email: null }),
       });
     }
 
@@ -161,10 +149,10 @@ class Curd extends React.Component {
 
   //编辑
   edit(record) {
-    let { name, age, type, email, _id } = record;
+    let { name, type, email, _id } = record;
     this.setState(
       {
-        modal: Object.assign({}, { name, age, type, email, _id }),
+        modal: Object.assign({}, { name, type, email, _id }),
       },
       () => {
         this.visibleHandle(_id);

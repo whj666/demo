@@ -46,18 +46,6 @@ class SearchBar extends React.Component {
             })(<Input placeholder="请输入" />)}
           </FormItem>
 
-          <FormItem label="最小年龄">
-            {this.props.form.getFieldDecorator("minAge", {
-              initialValue: "",
-            })(<InputNumber placeholder="请输入" />)}
-          </FormItem>
-
-          <FormItem label="最大年龄">
-            {this.props.form.getFieldDecorator("maxAge", {
-              initialValue: "",
-            })(<InputNumber placeholder="请输入" />)}
-          </FormItem>
-
           <FormItem>
             <Button type="primary" icon="search" onClick={this.handleSubmit}>
               查询

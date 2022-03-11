@@ -5,12 +5,11 @@ const User = require("./user.js");
 
 const saveUser = function(option){
     return new Promise(resolve => {
-        let {name, age, type, email, userName, _id} = option;
+        let {name, type, email, userName, _id} = option;
 
         if(!_id){
             let user = new User({
                 name,
-                age,
                 type,
                 email,
                 userName
