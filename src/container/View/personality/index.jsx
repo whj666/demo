@@ -6,8 +6,8 @@ import portrait1 from "./H5Resume/images/portrait1.jpg";
 class personality extends Component {
   render() {
     return (
-      <div style={{ height: "100%" }}>
-        <section className="page_one" id="page1" style={{ height: "100%" }}>
+      <div style={{ height: "200%" }}>
+        <section className="page_one" id="page1" style={{ height: "50%" }}>
           <div className="cen_con">
             <div className="portrait">
               <img src={portrait1} />
@@ -67,7 +67,7 @@ class personality extends Component {
           </div>
         </section>
 
-        <section className="page_two" id="page2">
+        <section className="page_two" id="page2" style={{ height: "50%" }}>
           <div className="con_wrap">
             <div className="tit_wrap">
               <h1>关于我</h1>

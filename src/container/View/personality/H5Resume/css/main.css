@@ -435,11 +435,9 @@
 html {
   font-size: 62.5%;
   width: 100%;
-  overflow: hidden;
 }
 body {
   font-size: 1.4rem;
-  overflow: hidden;
 }
 a {
   color: #fff;
