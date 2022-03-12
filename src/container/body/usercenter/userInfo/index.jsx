@@ -88,6 +88,7 @@ class UserInfo extends React.Component {
 
     this.state = {
       imageUrl: null,
+      imageCode: null,
       userPhotoReady: false,
       result: [],
     };
@@ -138,6 +139,7 @@ class UserInfo extends React.Component {
     postApi({ userName: localStorage.userName }, urls.getUserPhoto, (res) => {
       if (res.data) {
         this.setState({
+          imageCode: res.data,
           imageUrl: "http://localhost:8080/resources/images/" + res.data,
         });
       }
@@ -209,7 +211,15 @@ class UserInfo extends React.Component {
 
   //预览
   handleView = () => {
-    this.props.history.push(`/view`);
+    const queryFormData = this.props.form.getFieldsValue();
+    queryFormData.imageCode = this.state.imageCode || "34560006";
+    queryFormData.birthday =
+      queryFormData.birthday &&
+      moment(queryFormData.birthday).format("YYYY-MM-DD");
+
+    this.props.history.push(
+      `/view?queryFormData=${JSON.stringify(queryFormData)}`
+    );
   };
 
   render() {
