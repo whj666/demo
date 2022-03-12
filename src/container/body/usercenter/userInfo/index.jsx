@@ -115,6 +115,7 @@ class UserInfo extends React.Component {
           showAge: res.data.showAge,
           marriage: res.data.marriage,
           job: res.data.job === "" ? [] : res.data.job,
+          occupation: res.data.occupation,
           workAge: res.data.workAge,
           Hometown: res.data.Hometown,
           email: res.data.email,
@@ -288,6 +289,12 @@ class UserInfo extends React.Component {
                 <Option value="学生">学生</Option>
                 <Option value="其他">其他</Option>
               </Select>
+            )}
+          </FormItem>
+
+          <FormItem label="职业" {...formItemLayout}>
+            {this.props.form.getFieldDecorator("occupation")(
+              <Input placeholder="请输入" />
             )}
           </FormItem>
 
