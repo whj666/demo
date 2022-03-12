@@ -13,11 +13,6 @@ import * as actionAll from "actionAll";
 const menu = (
   <Menu>
     <Menu.Item>
-      <a href="#/usercenter/userInfo">
-        <Icon type="user" /> 个人信息
-      </a>
-    </Menu.Item>
-    <Menu.Item>
       <a href="#/login">
         <Icon type="logout" /> 注销
       </a>
@@ -34,7 +29,6 @@ class Top extends React.Component {
       userPhotoReady: false,
       flag: Boolean(Number(localStorage.collapsed)),
       titleName: navData.titleToName[props.hash[0]],
-      itemName: navData.itemToName[props.hash[1]],
     };
 
     props.actionAll.getUserPhoto({
@@ -49,7 +43,6 @@ class Top extends React.Component {
   componentWillReceiveProps(nextProps) {
     this.setState({
       titleName: navData.titleToName[nextProps.hash[0]],
-      itemName: navData.itemToName[nextProps.hash[1]],
     });
   }
 
@@ -119,7 +112,6 @@ class Top extends React.Component {
         <div className="bread">
           <Breadcrumb>
             <Breadcrumb.Item>{this.state.titleName}</Breadcrumb.Item>
-            <Breadcrumb.Item>{this.state.itemName}</Breadcrumb.Item>
           </Breadcrumb>
         </div>
       </div>
