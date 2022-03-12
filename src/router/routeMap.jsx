@@ -24,7 +24,7 @@ class RouterMap extends React.Component {
       <HashRouter>
         <Switch>
           <Route path="/login" component={Login} />
-          <Route path="/view/:type/:id" component={View} />
+          <Route path="/view" component={View} />
           <Route path="/" render={this.check} />
         </Switch>
       </HashRouter>
