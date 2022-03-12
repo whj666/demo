@@ -212,10 +212,42 @@ class UserInfo extends React.Component {
   //预览
   handleView = () => {
     const queryFormData = this.props.form.getFieldsValue();
-    queryFormData.imageCode = this.state.imageCode || "34560006";
+    queryFormData.imageCode = this.state.imageCode || "34560006.png";
     queryFormData.birthday =
       queryFormData.birthday &&
       moment(queryFormData.birthday).format("YYYY-MM-DD");
+
+    const Hometown = [];
+    const firstItem = cascaderAddressOptions.find(
+      (item) => item.value === queryFormData.Hometown[0]
+    );
+    const second = firstItem.children.find(
+      (item) => item.value === queryFormData.Hometown[1]
+    );
+    const thired = second.children.find(
+      (item) => item.value === queryFormData.Hometown[2]
+    );
+
+    Hometown.push(firstItem.label);
+    Hometown.push(second.label);
+    Hometown.push(thired.label);
+    queryFormData.Hometown = Hometown;
+
+    const currentHome = [];
+    const firstItemOne = cascaderAddressOptions.find(
+      (item) => item.value === queryFormData.currentHome[0]
+    );
+    const secondItem = firstItemOne.children.find(
+      (item) => item.value === queryFormData.currentHome[1]
+    );
+    const thiredOne = secondItem.children.find(
+      (item) => item.value === queryFormData.currentHome[2]
+    );
+
+    currentHome.push(firstItemOne.label);
+    currentHome.push(secondItem.label);
+    currentHome.push(thiredOne.label);
+    queryFormData.currentHome = currentHome;
 
     this.props.history.push(
       `/view?queryFormData=${JSON.stringify(queryFormData)}`
