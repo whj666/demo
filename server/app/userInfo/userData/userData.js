@@ -15,8 +15,16 @@ const UserData = new Schema({
   occupation: String,
   workAge: Number,
   Hometown: Array,
+  education: String,
+  school: String,
+  currentHome: Array,
   email: String,
+  phoneNumber: String,
+  qqNumber: String,
   personalitySignature: String,
+  major: String,
+  english: String,
+  introduce: String,
 });
 
 module.exports = mongoose.model("userData", UserData);

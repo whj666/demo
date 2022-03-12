@@ -118,8 +118,16 @@ class UserInfo extends React.Component {
           occupation: res.data.occupation,
           workAge: res.data.workAge,
           Hometown: res.data.Hometown,
+          education: res.data.education,
+          currentHome: res.data.currentHome,
           email: res.data.email,
+          school: res.data.school,
+          phoneNumber: res.data.phoneNumber,
+          qqNumber: res.data.qqNumber,
           personalitySignature: res.data.personalitySignature,
+          major: res.data.major,
+          english: res.data.english,
+          introduce: res.data.introduce,
         });
       }
     });
@@ -197,6 +205,11 @@ class UserInfo extends React.Component {
         );
       });
     }
+  };
+
+  //预览
+  handleView = () => {
+    this.props.history.push(`/view`);
   };
 
   render() {
@@ -312,6 +325,38 @@ class UserInfo extends React.Component {
             )}
           </FormItem>
 
+          <FormItem label="居住地" {...formItemLayout}>
+            {this.props.form.getFieldDecorator("currentHome", {
+              initialValue: [],
+            })(
+              <Cascader options={cascaderAddressOptions} placeholder="请选择" />
+            )}
+          </FormItem>
+
+          <FormItem label="学历" {...formItemLayout}>
+            {this.props.form.getFieldDecorator("education", {
+              initialValue: "",
+            })(<Input placeholder="请输入" />)}
+          </FormItem>
+
+          <FormItem label="专业" {...formItemLayout}>
+            {this.props.form.getFieldDecorator("major", {
+              initialValue: "",
+            })(<Input placeholder="请输入" />)}
+          </FormItem>
+
+          <FormItem label="英语" {...formItemLayout}>
+            {this.props.form.getFieldDecorator("english", {
+              initialValue: "",
+            })(<Input placeholder="请输入" />)}
+          </FormItem>
+
+          <FormItem label="学校" {...formItemLayout}>
+            {this.props.form.getFieldDecorator("school", {
+              initialValue: "",
+            })(<Input placeholder="请输入" />)}
+          </FormItem>
+
           <FormItem {...formItemLayout} label="邮箱">
             {this.props.form.getFieldDecorator("email", {
               initialValue: "",
@@ -327,6 +372,24 @@ class UserInfo extends React.Component {
             )}
           </FormItem>
 
+          <FormItem {...formItemLayout} label="手机">
+            {this.props.form.getFieldDecorator("phoneNumber", {
+              initialValue: "",
+            })(<Input placeholder="请输入" />)}
+          </FormItem>
+
+          <FormItem {...formItemLayout} label="QQ号">
+            {this.props.form.getFieldDecorator("qqNumber", {
+              initialValue: "",
+            })(<Input placeholder="请输入" />)}
+          </FormItem>
+
+          <FormItem {...formItemLayout} label="自我介绍">
+            {this.props.form.getFieldDecorator("introduce", {
+              initialValue: "",
+            })(<TextArea rows={3} placeholder="请输入" />)}
+          </FormItem>
+
           <FormItem {...formItemLayout} label="个性签名">
             {this.props.form.getFieldDecorator("personalitySignature", {
               initialValue: "",
@@ -339,16 +402,20 @@ class UserInfo extends React.Component {
               sm: { span: 16, offset: 4 },
             }}
           >
-            <Button type="primary" onClick={this.handleSubmit}>
-              确定
-            </Button>
             <Button
-              className="ml10"
               onClick={() => {
                 this.props.form.resetFields();
               }}
             >
               重置
+            </Button>
+
+            <Button className="ml10" type="primary" onClick={this.handleSubmit}>
+              确定
+            </Button>
+
+            <Button className="ml10" type="primary" onClick={this.handleView}>
+              预览
             </Button>
           </FormItem>
         </Form>
