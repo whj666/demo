@@ -28,6 +28,19 @@ class personality extends Component {
 
     return (
       <div style={{ height: "200%" }}>
+        <div style={{ position: "fixed", right: 0, top: 0 }}>
+          <iframe
+            allow="autoplay"
+            frameborder="no"
+            border="0"
+            marginwidth="0"
+            marginheight="0"
+            width="330"
+            height="86"
+            src="//music.163.com/outchain/player?type=2&id=36990266&auto=1&height=66"
+          ></iframe>
+        </div>
+
         <section className="page_one" id="page1" style={{ height: "50%" }}>
           <div className="cen_con">
             <div className="portrait">
